@@ -69,9 +69,9 @@ class Kernel extends HttpKernel
 
         // Para poder habilitar estas funciones necesitas agregar los siguientes middlewares al archivo app/Http/Kernel.php:
         // Ver: https://www.hoclabs.com/2018/01/14/laravel-roles-y-permisos/
-        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
-        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
-        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+        'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
 
     ];
 }
