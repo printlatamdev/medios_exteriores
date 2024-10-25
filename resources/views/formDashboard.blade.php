@@ -17,31 +17,22 @@
     <meta name="description" content="DashboardKit is made using Bootstrap 5 design framework. Download the free admin template & use it for your project.">
     <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template">
     <meta name="author" content="DashboardKit ">
-
-
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.svg" type="image/x-icon">
-
     <!-- font css -->
     <link rel="stylesheet" href="{{  asset('assets/fonts/feather.css')      }}">
     <link rel="stylesheet" href="{{  asset('assets/fonts/fontawesome.css')  }}">
     <link rel="stylesheet" href="{{  asset('assets/fonts/material.css')     }}">
-
     <!-- vendor css -->
-    <link rel="stylesheet" href="{{  asset('assets/css/style.css')          }}" id="main-style-link">
-
+    <link rel="stylesheet" href="{{  asset('assets/css/style.css') }}" id="main-style-link">
 	<!-- Font Awesome v 6.1.2   -->
     <link href="{{  asset('vendorSystemFile/fontawesome-free-6.1.2-web/css/all.css') }}" rel="stylesheet">
-
 	<!-- SELECT CON BUSCAR INTEGRADO -->
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- PARA SELECCION MULTIPLE, ESTILO -->
     <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet" /> 
-
     @yield('linkForm')
-
 </head>
-
 <body class="">
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
@@ -49,7 +40,6 @@
 			<div class="loader-fill"></div>
 		</div>
 	</div>
-	<!-- [ Pre-loader ] End -->
 	<!-- [ Mobile header ] start -->
 	<div class="pc-mob-header pc-header">
 		<div class="pcm-logo">
@@ -71,11 +61,6 @@
 			</a>
 		</div>
 	</div>
-	<!-- [ Mobile header ] End -->
-
-
-
-	<!-- [ navigation menu ] start -->
 	<!-- MENU LATERAL -->
 	<nav class="pc-sidebar ">
 		<div class="navbar-wrapper">
@@ -96,22 +81,9 @@
 					<li class="pc-item">
 						<a href="index.html" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a>
 					</li>
-
-
-
 					 <li class="pc-item pc-caption">
 						<label>cPanel</label>
 						<span>TIC's</span>
-					</li>
-
-					<li class="pc-item pc-hasmenu">
-						<a href="{{route('PlataformasInstitucionales.index')}}" class="pc-link ">
-							<span class="pc-micon">
-								<i class="fa-solid fa-toolbox"></i>
-							</span>
-							<span class="pc-mtext">Plataformas institucionales</span>
-							<span class="pc-arrow"><i class="fa-solid fa-circle-chevron-right"></i></span>
-						</a>
 					</li>
 					<li class="pc-item pc-hasmenu">
 						<a href="" class="pc-link ">
@@ -140,9 +112,6 @@
 							<span class="pc-arrow"><i class="fa-solid fa-circle-chevron-right"></i></span>
 						</a>
                     </li>
-
-
-
 					<!-- <li class="pc-item pc-hasmenu">
 						<a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Basic</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
 						<ul class="pc-submenu">
@@ -152,9 +121,6 @@
 							<li class="pc-item"><a class="pc-link" href="bc_breadcrumb-pagination.html">TIPS TIC</a></li>
 						</ul>
 					</li> -->
-					
-
-					
 					<!-- <li class="pc-item pc-caption">
 						<label>Other</label>
 						<span>Extra more things</span>
@@ -193,15 +159,10 @@
 							</li>
 						</ul>
 					</li> -->
-
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<!-- [ navigation menu ] end -->
-
-
-
 	<!-- [ Header ] start -->
 	<header class="pc-header ">
 		<div class="header-wrapper">
@@ -259,7 +220,6 @@
 					</li>
 				</ul>
 			</div>
-
 			<!-- MENU SUPERIOR DERECHO -->
 			<div class="ml-auto">
 				<ul class="list-unstyled">
@@ -300,19 +260,9 @@
 
 		</div>
 	</header>
-	<!-- [ Header ] end -->
-
-
-
-
-
-
-    <!-- [ Main Content ] start -->
 	<!-- BARRA DONDE MUESTRA LA BIENVENIDA AL USUARIO -->
     <div class="pc-container">
         <div class="pcoded-content">
-
-
 		    @role('admin')
                 <!-- [ breadcrumb ] start -->
                 <div class="page-header">
@@ -332,20 +282,9 @@
                 </div>
                 <!-- [ breadcrumb ] end -->
             @endrole
-
-
     		@yield('content')
-
-
     	</div>
     </div>
-    <!-- [ Main Content ] end -->
-
-
-
-
-
-
 	<!-- DIRECTIVAS IMPORTANTES NO BORRAR -->
 	<!-- usuarios invitados -->
 	@guest
@@ -361,9 +300,6 @@
 	<!-- no autenticados -->
 	@endauth
 	<!-- FIN DIRECTIVAS IMPORTANTES NO BORRAR -->
-
-    
-
 
 	
     <!-- Warning Section start -->

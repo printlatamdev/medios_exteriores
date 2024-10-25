@@ -71,7 +71,7 @@ Route::group(['middleware' => ['role:admin|clientes']], function () {
 
 
 
-Route::prefix('plataformasInstitucionales')->group(function () {
+/**Route::prefix('plataformasInstitucionales')->group(function () {
     Route::get('/index', [PlataformasInstitucionalesController::class, 'verRegistroUsuario'])->name('PlataformasInstitucionales.index');  
     Route::post('/store', [PlataformasInstitucionalesController::class, 'store'])->name('PlataformasInstitucionales.store');  
-})->middleware(['role:admin|clientes']);
+})->middleware(['role:admin|clientes']); */
