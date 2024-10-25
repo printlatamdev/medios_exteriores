@@ -17,7 +17,7 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             return route('login');
         }
-        // REDIRECCIONA A LOGIN SI A EXPITRADO LA SESION, ES NECESARIO PARA QUE NO RECUERDE LA SESION, 
+        // REDIRECCIONA A LOGIN SI A EXPITRADO LA SESION, ES NECESARIO PARA QUE NO RECUERDE LA SESION,
         // HACE REFERENCIA AL  'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class, EN kernel.php
         // return redirect()->guest('login');
     }

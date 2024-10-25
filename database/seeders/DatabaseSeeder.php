@@ -3,12 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-use function GuzzleHttp\Promise\each;
-
 // IMPORT HECHAS POR EL PROGRAMADOR
-use  App\Models\User;
+use function GuzzleHttp\Promise\each;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,7 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         // AGREGAR LOS DATA DE TABLA PAIS
         $this->call(PaisSeeder::class);
-
 
         // DESPUES DE CREARLOS LOS RECORRO Y POR CADA ELEMENTO USER, QUIERO QUE LE ASIGNE EL ROL DEVELOPMENT
         // User::factory(10)->create()->each(function($user){

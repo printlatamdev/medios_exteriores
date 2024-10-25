@@ -195,7 +195,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        
         // AGREGADAS POR EL PROGRAMADOR
         Spatie\Permission\PermissionServiceProvider::class,
 

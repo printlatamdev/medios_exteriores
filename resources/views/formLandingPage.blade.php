@@ -1,115 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-
-	<title>DashboardKit, @yield('title')</title>
+	<title>Medios exteriores - @yield('title')</title>
 	<!-- Meta -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="description" content="DashboardKit is made using Bootstrap 5 design framework. Download the free admin template & use it for your project.">
-	<meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template">
-	<meta name="author" content="DashboardKit ">
-
+	<meta name="description" content="Lorem ipsum">
+	<meta name="keywords" content="lorem, ipsum">
+	<meta name="author" content="Color Digital">
 
 	<!-- Favicon icon -->
 	<link rel="icon" href="assets/images/favicon.svg" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset('vendorSystemFile/css/app.css') }}">
-
-	<!-- font css -->
-	<!-- <link rel="stylesheet" href="{{  asset('assets/fonts/feather.css')     }}">
-	<link rel="stylesheet" href="{{  asset('assets/fonts/fontawesome.css') }}">
-	<link rel="stylesheet" href="{{  asset('assets/fonts/material.css')    }}">  -->
-
-	<!-- vendor css, bootstrap plantia -->
-	<!-- <link rel="stylesheet" href="{{  asset('assets/css/style.css')        }}" id="main-style-link"> -->
-
-    <!-- BOOTSTRAP 5.2.X -->
-    <!-- CSS only -->
-    <link href="{{  asset('vendorSystemFile/bootstrap/v5.2.x/bootstrap.min.css')  }}" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
-    <script src="{{  asset('vendorSystemFile/bootstrap/v5.2.x/bootstrap.bundle.min.js')  }}" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
-
-    <!-- SELECT CON BUSCAR INTEGRADO -->
+  <!-- Bootstrap -->
+  <link href="{{  asset('vendorSystemFile/bootstrap/v5.2.x/bootstrap.min.css')  }}" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="{{  asset('vendorSystemFile/bootstrap/v5.2.x/bootstrap.bundle.min.js')  }}" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <!-- SELECT CON BUSCAR INTEGRADO -->
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- PARA SELECCION MULTIPLE, ESTILO -->
-    <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet" /> 
-
-
-    <!-- Font Awesome v 6.1.2   -->
-    <link href="{{  asset('vendorSystemFile/fontawesome-free-6.1.2-web/css/all.css') }}" rel="stylesheet">
-
-    @yield('linkForm')
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
-        body {
-               /* background: url("<?=''//base_url('assets/image/fondo.png');?>") no-repeat center top fixed; */
-               background: #DFDEDE no-repeat center center fixed;
-               /* padding-top: 100px !important; */
-               -webkit-background-size: cover;
-               -moz-background-size: cover;
-               -o-background-size: cover;
-               background-size: cover;
-        }  
-        .navbar {
-           opacity: 1.0;
-        } 
-        .logo-imagen {
-          /* margin: 0px !important;
-          padding: 0px !important;
-          border: 0px !important; */
-          background-color: #045aa0 !important;
-        }
-        .color-letra-menu{
-          color: white;
-        }
-        .contenedor{         
-          /* background-color: #000000; */
-          /* opacity: 0.8; */
-          /* background-color: rgba(28, 67, 98, 0.5);/* Color semi transparente */
-
-          padding: 0px;
-
-          -moz-border-radius: 3px 3px 3px 3px;
-          -webkit-border-radius: 3px 3px 3px 3px;
-          border-radius: 3px 3px 3px 3px;
-          behavior:url(border.htc);
-
-          /*box-shadow: 0px 0px 2px #000000; */
-          -ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=12, Direction=135, Color=#000000)'; 
-          filter: progid:DXImageTransform.Microsoft.Shadow(Strength=12, Direction=135, Color='#000000');
-          
-          margin-right: 0px;
-          margin-left: 0px;
-
-          padding-left: 10px;
-          padding-right: 10px;
-        }
-        /* @media screen and (max-width:991px){
-            .cuerpo{
-               text-align:left;
-            }
-        }    */
-   
-        /* @media screen and (max-width:397px){
-            .logo-image-navbar{
-               width: 250px; 
-               height: 40px;  
-               margin: 0; 
-               padding:0;
-            }
-        } */
-    </style>
-
+  <!-- PARA SELECCION MULTIPLE, ESTILO -->
+  <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet" /> 
+  <!-- Font Awesome v 6.1.2   -->
+  <link href="{{  asset('vendorSystemFile/fontawesome-free-6.1.2-web/css/all.css') }}" rel="stylesheet">
+  @yield('linkForm')
 </head>
 <body>
-
-<!-- [ auth-signin ] start -->
-
-
     <!-- delay1 -->
     <nav class="logo-imagen navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
@@ -143,11 +59,8 @@
         <div class="row">
 
             @yield('content')
-
         </div>
     </div>
-    
-<!-- [ auth-signin ] end -->
 
 <!-- Required Js -->
 <!-- <script src="{{  asset('assets/js/vendor-all.min.js')        }}"></script> -->
@@ -159,21 +72,13 @@
 <script type="text/javascript" charset="utf8" src="{{  asset('vendorSystemFile/jquery/jquery-3.6.1.min.js') }}"></script>
 <!-- <script type="text/javascript" charset="utf8" src="{{  asset('vendorSystemFile/jquery/jquery-3.5.1.min.js') }}"></script> -->
 <!-- <script type="text/javascript" charset="utf8" src="{{  asset('vendorSystemFile/jquery/jquery-3.4.1.min.js') }}"></script> -->
-	
-
 <!-- JS AGREGADOS POREL PROGRAMADOR -->
 <script src="{{  asset('vendorSystemFile/js/jsProcesosEstandar.js')  }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <!-- SELECT CON BUSCAR INTEGRADO -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-
 <script>
-    // $("body").append('<div class="fixed-button active"><a href="https://gumroad.com/dashboardkit" target="_blank" class="btn btn-md btn-success"><i class="material-icons-two-tone text-white">shopping_cart</i> Upgrade To Pro</a> </div>');
 	setUrlBase("{{$urlJs}}");
 </script>
-
 </body>
-
 </html>
