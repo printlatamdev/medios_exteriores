@@ -45,32 +45,21 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_MYSQL', '127.0.0.1'),
-            'port' => env('DB_PORT_MYSQL', '33063'),
-            'database' => env('DB_DATABASE_MYSQL', 'root'),
-            'username' => env('DB_USERNAME_MYSQL', 'root'),
-            'password' => env('DB_PASSWORD_MYSQL', ''),
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
             'prefix' => '',
             'prefix_indexes' => true,
-            'strict' => true, //Laravel viene configurado con un modo estricto para NO permitir estás inconsistencias en consulta SQL, por eso ahí no funciona y en tu MySQL/MariaDB si por qué en estos dos últimos debes configurar el modo estricto.
-            // 'modes' => [
-            //     //'ONLY_FULL_GROUP_BY', // Disable this to allow grouping by one column
-            //     'STRICT_TRANS_TABLES',
-            //     'NO_ZERO_IN_DATE',
-            //     'NO_ZERO_DATE',
-            //     'ERROR_FOR_DIVISION_BY_ZERO',
-            //     'NO_AUTO_CREATE_USER',
-            //     'NO_ENGINE_SUBSTITUTION'
-            // ],
+            'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-                // PDO::ATTR_EMULATE_PREPARES => true,
-
             ]) : [],
         ],
 
@@ -117,7 +106,10 @@ return [
     |
     */
 
-    'migrations' => 'migrations',
+    'migrations' => [
+        'table' => 'migrations',
+        'update_date_on_publish' => true,
+    ],
 
     /*
     |--------------------------------------------------------------------------
