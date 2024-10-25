@@ -5,8 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegistroUserController;
-use App\Http\Controllers\PlataformasInstitucionalesController;
-// LARAVEL PERMISSIONS, SPATIE
 use \Illuminate\Auth\Middleware\Authorize;
 
 /*
@@ -25,7 +23,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
-
 // RUTAS PUBLICAS
 Route::prefix('usuario')->group(function () {
     // Si no es una peticion json se regresa a la peticion con el nombre ->name('login') en web.php, 
@@ -46,8 +43,8 @@ Route::prefix('usuario')->group(function () {
 // EJEMPLO DE USUARIO CON ROLES Y PERMISOS
 // require __DIR__.'/auth.php';
 
-// Route::middleware(['auth'])->group(function () {    
-Route::group(['middleware' => ['role:admin|clientes']], function () {
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'] )->name('dashboard');
     Route::get('/logout', [DashboardController::class, 'logout'])/*->middleware(['role:admin|clientes'])*/->name('logout');  
     // Route::get('/dashboard'             , [DashboardController::class, 'index'] )->name('dashboard');
     /* USERS */
@@ -61,13 +58,6 @@ Route::group(['middleware' => ['role:admin|clientes']], function () {
     // Route::delete('users/{user}/destroy', [UserController::class, 'destroy' ])->name('users.destroy');
 });
 // FIN EJEMPLO DE USUARIO CON ROLES Y PERMISOS
-
-
-// ESTE ES EL DASHBOARD GENERAL
-Route::group(['middleware' => ['role:admin|clientes']], function () {
-    Route::get('/dashboard'             , [DashboardController::class, 'index'] )->name('dashboard');
-    // Route::post('users'                 , [UserController::class, 'showPost'])->name('users.showPost');
-});
 
 
 
