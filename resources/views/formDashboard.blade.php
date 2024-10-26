@@ -66,7 +66,6 @@
 			<div class="navbar-content">
 				<ul class="pc-navbar">
 
-
 					<li class="pc-item pc-caption">
 						<label>Navigation</label>
 					</li>

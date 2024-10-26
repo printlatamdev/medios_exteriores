@@ -28,9 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         // USUARIOS BASE
         $this->call(UserSeeder::class);
-        // AGREGAR LOS DATA DE TABLA PAIS
-        $this->call(PaisSeeder::class);
-
         // DESPUES DE CREARLOS LOS RECORRO Y POR CADA ELEMENTO USER, QUIERO QUE LE ASIGNE EL ROL DEVELOPMENT
         // User::factory(10)->create()->each(function($user){
         //     $user->assignRole('Development');
