@@ -3,13 +3,6 @@
 
 <head>
     <title>DashboardKit, @yield('title')</title>
-    <!-- DashboardKit Bootstrap 5 Admin Template -->
-    <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 11]>
-    	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    	<![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -20,18 +13,17 @@
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.svg" type="image/x-icon">
     <!-- font css -->
-    <link rel="stylesheet" href="{{  asset('assets/fonts/feather.css')      }}">
-    <link rel="stylesheet" href="{{  asset('assets/fonts/fontawesome.css')  }}">
-    <link rel="stylesheet" href="{{  asset('assets/fonts/material.css')     }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/feather.css')      }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css')  }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/material.css')     }}">
     <!-- vendor css -->
-    <link rel="stylesheet" href="{{  asset('assets/css/style.css') }}" id="main-style-link">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
 	<!-- Font Awesome v 6.1.2   -->
-    <link href="{{  asset('vendorSystemFile/fontawesome-free-6.1.2-web/css/all.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendorSystemFile/fontawesome-free-6.1.2-web/css/all.css') }}" rel="stylesheet">
 	<!-- SELECT CON BUSCAR INTEGRADO -->
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- PARA SELECCION MULTIPLE, ESTILO -->
-    <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet" /> 
-    @yield('linkForm')
+    <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet" />
 </head>
 <body class="">
 	<!-- [ Pre-loader ] start -->
