@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 // PARA LA RUTA BASE
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +9,6 @@ use Illuminate\Support\Facades\URL;
 
 class DashboardController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +23,8 @@ class DashboardController extends Controller
             'lastName' => $user['last_name'],
             //'nameRole' => $user['roles'][0]['name'],
         ];
-        return view('home/formHome', $data);
+
+        return view('home/dashboard', $data);
     }
 
     /**

@@ -32,5 +32,5 @@ Route::middleware(['auth'])->group(function () {
     /* USERS */
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::put('/users.update/{user}', [UserController::class, 'update'])->name('users.update');
-    
+
 });
