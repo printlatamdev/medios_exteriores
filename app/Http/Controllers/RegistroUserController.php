@@ -22,7 +22,7 @@ class RegistroUserController extends Controller
             'urlJs' => URL::to('/'), // Each of these methods may also be accessed via the URL facade, tambien url('/'), ruta base de laravel via helper
         ];
 
-        return view('vistasLogin/formLoginUsuario', $data);
+        return view('loginViews/formLoginUsuario', $data);
     }
 
     /**
@@ -80,17 +80,5 @@ class RegistroUserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function verRegistroUsuario(): object
-    {
-        $arrayPaises = $this->paisAdd(['all']);
-        $data = [
-            'urlJs' => URL::to('/'), // Each of these methods may also be accessed via the URL facade, tambien url('/'), ruta base de laravel via helper
-            'idPais' => $this->selectInputPaisCodeArea($arrayPaises, 'paisUser', 'Selección desplegable', 'id', 'nombre', '', 'form-select textBuscarSelect', 'style="width: 100%;"'),
-            'sexo' => $this->selectInputGeneral($this->selectSexo(-1, 'Mostrar'), 'sexoUser', 'Selección desplegable', 'item', 'nombre', '', 'form-select'),
-        ];
-
-        return view('vistasLogin/formRegistroUsuario', $data);
     }
 }

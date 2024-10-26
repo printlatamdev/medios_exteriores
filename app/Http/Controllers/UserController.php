@@ -45,7 +45,7 @@ class UserController extends Controller
             'nameRole' => $user->roles[0]['name'],
         ];
 
-        return view('vistasLogin/formPerfilUsuario', $data);
+        return view('loginViews/formPerfilUsuario', $data);
     }
 
     /**
@@ -204,11 +204,4 @@ class UserController extends Controller
     {
         //
     }
-
-    // public function login(){
-    //     $data = array(
-    //         'urlJs' => URL::to('/'), // Each of these methods may also be accessed via the URL facade, tambien url('/'), ruta base de laravel via helper
-    //     );
-    //     return view('vistasLogin/formLoginUsuario', $data);
-    // }
 }
