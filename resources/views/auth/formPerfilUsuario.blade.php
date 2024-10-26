@@ -1,5 +1,5 @@
 
-@extends('formDashboard')
+@extends('dashboard')
 @section('title', 'Perfil de usuario')
 
 @section('linkForm')

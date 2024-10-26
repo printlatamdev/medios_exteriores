@@ -45,7 +45,7 @@ class UserController extends Controller
             'nameRole' => $user->roles[0]['name'],
         ];
 
-        return view('loginViews/formPerfilUsuario', $data);
+        return view('auth/formPerfilUsuario', $data);
     }
 
     /**

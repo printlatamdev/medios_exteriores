@@ -82,6 +82,6 @@ class DashboardController extends Controller
         ];
 
         // return redirect()->route('usuario/login');
-        return view('loginViews/formLoginUsuario', $data);
+        return view('auth/formLoginUsuario', $data);
     }
 }

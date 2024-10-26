@@ -22,7 +22,7 @@ class RegistroUserController extends Controller
             'urlJs' => URL::to('/'), // Each of these methods may also be accessed via the URL facade, tambien url('/'), ruta base de laravel via helper
         ];
 
-        return view('loginViews/formLoginUsuario', $data);
+        return view('auth/formLoginUsuario', $data);
     }
 
     /**
