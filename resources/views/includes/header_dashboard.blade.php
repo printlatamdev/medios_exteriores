@@ -2,12 +2,12 @@
     <!-- MENU AJUSTES -->
     <div class="mr-auto">
         <ul class="list-unstyled">
-            <li class="dropdown pc-h-item">
+            <li class="dropdown">
                 <a class="pc-head-link active dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#"
                     role="button" aria-haspopup="false" aria-expanded="false">
                     Ajustes
                 </a>
-                <div class="dropdown-menu pc-h-dropdown">
+                <div class="dropdown-menu pc-h-dropdown p-2">
                     <a href="#" class="dropdown-item">
                         <i class="material-icons-two-tone">account_circle</i>
                         <span>Mi cuenta</span>
@@ -57,7 +57,7 @@
 
                     <a href="<?= url('logout') ?>" class="dropdown-item">
                         <i class="material-icons-two-tone">chrome_reader_mode</i>
-                        <span>Logout</span>
+                        <span>Cerrar sesión</span>
                     </a>
                 </div>
             </li>

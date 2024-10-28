@@ -14677,7 +14677,7 @@ pre[class*="language-"] > code {
     display: block;
     padding: 13px 20px;
     color: #ced4dc;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
 }
 
@@ -17926,7 +17926,7 @@ body:not(.minimenu) .pc-sidebar .pc-submenu .pc-submenu .pc-submenu > .pc-item:b
 }
 
 .dropdown .dropdown-item {
-    padding: 10px 25px;
+    padding: 5px;
 }
 
 .dropdown .dropdown-item i {
