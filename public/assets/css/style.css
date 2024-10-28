@@ -6614,12 +6614,6 @@ textarea.form-control-lg {
     z-index: 1030;
 }
 
-.sticky-top {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-}
 
 @media (min-width: 576px) {
     .sticky-sm-top {
@@ -7384,10 +7378,6 @@ textarea.form-control-lg {
 
 .mr-5 {
     margin-right: 3rem !important;
-}
-
-.mr-auto {
-    margin-right: auto !important;
 }
 
 .mb-0 {
@@ -14618,8 +14608,6 @@ pre[class*="language-"] > code {
 
 .pc-sidebar {
     background: #1c232f;
-    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
-    width: 280px;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -14939,14 +14927,11 @@ body:not(.minimenu) .pc-sidebar .pc-submenu .pc-submenu .pc-submenu > .pc-item:b
 }
 
 .pc-header {
+    width: 100%;
+    padding: 5px;
     background: #fff;
-    box-shadow: 0 1px 0 0 #f1f1f1;
-    color: #525b69;
-    min-height: 70px;
-    position: fixed;
-    left: 280px;
-    right: 0;
-    z-index: 1025;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .pc-header ul {
@@ -14956,11 +14941,10 @@ body:not(.minimenu) .pc-sidebar .pc-submenu .pc-submenu .pc-submenu > .pc-item:b
 
 .pc-header .header-wrapper {
     display: flex;
-    padding: 0 30px;
+    padding: 0 5px;
 }
 
 .pc-header .pc-h-item {
-    min-height: 70px;
     display: flex;
     align-items: center;
     position: relative;
@@ -15348,10 +15332,6 @@ body:not(.minimenu) .pc-sidebar .pc-submenu .pc-submenu .pc-submenu > .pc-item:b
     padding-top: 30px;
 }
 
-.pc-container .page-header + .row {
-    padding-top: 50px;
-}
-
 .pc-container .page-header + .pcoded-content {
     padding-top: calc(30px + 55px);
 }
@@ -15360,26 +15340,14 @@ body:not(.minimenu) .pc-sidebar .pc-submenu .pc-submenu .pc-submenu > .pc-item:b
     margin-left: 70px;
 }
 
-.minimenu .page-header {
-    left: 70px;
-}
 
 .page-header {
     background: #fff;
-    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
-    position: fixed;
     display: flex;
     align-items: center;
     top: 70px;
-    left: 280px;
     right: 0;
-    z-index: 1023;
-    min-height: 55px;
     padding: 13px 30px;
-}
-
-.page-header .page-block {
-    width: 100%;
 }
 
 .page-header .page-header-title {

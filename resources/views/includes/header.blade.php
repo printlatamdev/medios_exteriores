@@ -1,4 +1,4 @@
-<nav class="logo-imagen navbar sticky-top navbar-expand-lg navbar-dark bg-">
+<nav class="logo-imagen navbar sticky-top navbar-expand-lg navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
            <img class="logo-image-navbar" src="{{  asset('vendorSystemFile/image/logo.png') }}">

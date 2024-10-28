@@ -6,7 +6,7 @@
 		</div>
 	</div>
 	<!-- [ Mobile header ] start -->
-	<div class="pc-mob-header pc-header">
+	<div class="pc-mob-header">
 		<div class="pcm-logo">
 			<img src="assets/images/logo.svg" alt="" class="logo logo-lg">
 		</div>
