@@ -1,4 +1,4 @@
-<header class="pc-header sticky-top">
+<header class="pc-header sticky-top bg-white">
     <!-- MENU AJUSTES -->
     <div class="mr-auto">
         <ul class="list-unstyled">
@@ -8,19 +8,15 @@
                     Ajustes
                 </a>
                 <div class="dropdown-menu pc-h-dropdown">
-                    <a href="<?= url('users') ?>" class="dropdown-item">
+                    <a href="#" class="dropdown-item">
                         <i class="material-icons-two-tone">account_circle</i>
                         <span>Mi cuenta</span>
                     </a>
-                    <a href="<?= ''
-//url('users');
-?>" class="dropdown-item">
+                    <a href="#" class="dropdown-item">
                         <i class="material-icons-two-tone">account_circle</i>
                         <span>Crear usuario</span>
                     </a>
-                    <a href="<?= ''
-//url('users');
-?>" class="dropdown-item">
+                    <a href="">
                         <i class="material-icons-two-tone">account_circle</i>
                         <span>Permisos de usuario</span>
                     </a>
@@ -69,7 +65,7 @@
     </div>
 
 </header>
-<div class="page-header container-fluid bg-body-secondary">
+<div class="page-header container-fluid border-top bg-white">
     <div class="row">
         <div class="col-12 d-flex">
             <div class="page-header-title">

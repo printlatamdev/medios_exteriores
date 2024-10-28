@@ -4,19 +4,21 @@
     @include('includes.head')
 </head>
 
-<body>
+<body style=" background: #F5F5F7">
     <div id="app" class="overflow-x-hidden">
         <div class="row">
-            <div class="col-2">
+            <div class="mainSidebar">
                 <!--Sidebar-->
                 @include('includes.sidebar')
             </div>
-            <div class="col-10">
+            <div class="mainContent">
                 <!--Header dashboard -->
                 @include('includes.header_dashboard')
                 <!--Loader-->
                 @include('includes.menu_loader')
-                @yield('content')
+               <div class="p-25 ">
+                    @yield('content')
+               </div>
             </div>
         </div>
     </div>
