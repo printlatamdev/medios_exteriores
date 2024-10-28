@@ -11,4 +11,8 @@ class Department extends Model
     public function municipality(){
         return $this->hasMany(Municipality::class);
     }
+
+    public function location(){
+        return $this->hasMany(Location::class);
+    }
 }

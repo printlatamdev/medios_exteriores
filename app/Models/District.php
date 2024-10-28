@@ -11,4 +11,8 @@ class District extends Model
     public function municipality(){
         return $this->belongsTo(Municipality::class);
     }
+
+    public function location(){
+        return $this->hasMany(Location::class);
+    }
 }
