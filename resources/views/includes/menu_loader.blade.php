@@ -5,9 +5,9 @@
     </div>
 </div>
 <!-- [ Mobile header ] start -->
-<div class="pc-mob-header">
+<div class="pc-mob-header px-5">
     <div class="pcm-logo">
-        <img src="assets/images/logo.svg" alt="" class="logo logo-lg">
+        <img src="assets/images/logo.jpg" alt="" class="" style="width: 85px">
     </div>
     <div class="pcm-toolbar">
         <a href="#!" class="pc-head-link" id="mobile-collapse">
@@ -17,11 +17,11 @@
                 </div>
             </div>
         </a>
-        <a href="#!" class="pc-head-link" id="headerdrp-collapse">
+       <!-- <a href="#!" class="pc-head-link" id="headerdrp-collapse">
             <i data-feather="align-right"></i>
         </a>
         <a href="#!" class="pc-head-link" id="header-collapse">
             <i data-feather="more-vertical"></i>
-        </a>
+        </a>-->
     </div>
 </div>

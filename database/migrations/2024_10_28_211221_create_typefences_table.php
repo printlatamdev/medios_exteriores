@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fences', function (Blueprint $table) {
+        Schema::create('typefences', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->text('address');
-            $table->foreignId('typefence_id')->constrained();
+            $table->string('name');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fences');
+        Schema::dropIfExists('typefences');
     }
 };
