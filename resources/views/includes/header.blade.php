@@ -1,7 +1,7 @@
 <nav class="logo-imagen navbar sticky-top navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img class="logo-image-navbar" src="{{ asset('vendorSystemFile/image/logo.png') }}">
+            <img src="assets/images/logo.jpg" alt="" class="" style="width: 120px; display:block; margin:0 auto">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
