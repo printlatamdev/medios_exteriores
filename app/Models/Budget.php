@@ -29,4 +29,10 @@ class Budget extends Model
         'payment_date_electricity',
         'total_payment',
     ];
+
+    
+    public function externalmedias()
+    {
+        return $this->belongsToMany(Externalmedia::class, 'budget_externalmedia');
+    }
 }

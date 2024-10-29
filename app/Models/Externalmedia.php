@@ -19,4 +19,9 @@ class Externalmedia extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+    public function budgets()
+    {
+        return $this->belongsToMany(Budget::class, 'budget_externalmedia');
+    }
 }
