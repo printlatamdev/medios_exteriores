@@ -30,16 +30,10 @@ class UserController extends Controller
     {
         //
         $user = Auth::user();
-
-        $arrayPaises = $this->paisAdd(['all']);
         $data = [
             'urlJs' => URL::to('/'), // Each of these methods may also be accessed via the URL facade, tambien 'url' => url('/'), ruta base de laravel via helper
-            'firstName' => $user->first_name,
-            'lastName' => $user->last_name,
+            'name' => $user->name,
             'email' => $user->email,
-            'phoneNumber' => $user->phone_number,
-            'idPais' => $this->selectInputPaisCodeArea($arrayPaises, 'paisUser', 'Selección desplegable', 'id', 'nombre', is_null($user->idpais) ? '' : $user->idpais, 'form-control textBuscarSelect', 'style="width: 100%;"'),
-            'sexo' => $this->selectInputGeneral($this->selectSexo(-1, 'Mostrar'), 'sexoUser', 'Selección desplegable', 'item', 'nombre', is_null($user->sexo) ? '' : $user->sexo, 'form-select'),
             'cargoInstitucion' => $user->cargo_institucion,
 
             'nameRole' => $user->roles[0]['name'],
@@ -106,7 +100,7 @@ class UserController extends Controller
             request()->session()->regenerate(); //regenera el token inicial del usuario por seguridad
             $user = json_decode(''.Auth::user().'', true);
             $linkAcceso = '/dashboard';
-            $nombrePersona = 'Bienvenida/o '.$user['first_name'];
+            $nombrePersona = 'Bienvenida/o '.$user['name'];
             $status = 200;
         }
 
@@ -136,20 +130,11 @@ class UserController extends Controller
 
             User::where('id', $user->id)
                 ->update([
-                    'first_name' => $request->nombresUser,
-                    'last_name' => $request->apellidosUser,
+                    'name' => $request->name,
                     'email' => $uEmail,
-                    'phone_number' => '',
-                    'idpais' => $request->paisUser,
-                    'sexo' => $request->sexoUser,
-                    'cargo_institucion' => $request->cargoUser,
                 ]);
-            $user->first_name = $request->nombresUser;
-            $user->last_name = $request->apellidosUser;
+            $user->name = $request->name;
             $user->email = $uEmail;
-            $user->idpais = $request->paisUser;
-            $user->sexo = $request->sexoUser;
-            $user->cargo_institucion = $request->cargoUser;
             $acciones = [
                 'estado' => 'Registro actualizados correctamente',
             ];
@@ -161,22 +146,13 @@ class UserController extends Controller
                 // password igual
                 User::where('id', $user->id)
                     ->update([
-                        'first_name' => $request->nombresUser,
-                        'last_name' => $request->apellidosUser,
+                        'name' => $request->name,
                         'email' => $uEmail,
-                        'phone_number' => '',
                         'password' => $uPassword,
-                        'idpais' => $request->paisUser,
-                        'sexo' => $request->sexoUser,
-                        'cargo_institucion' => $request->cargoUser,
                     ]);
-                $user->first_name = $request->nombresUser;
-                $user->last_name = $request->apellidosUser;
+                $user->name = $request->name;
                 $user->email = $uEmail;
                 $user->password = $uPassword;
-                $user->idpais = $request->paisUser;
-                $user->sexo = $request->sexoUser;
-                $user->cargo_institucion = $request->cargoUser;
                 $acciones = [
                     'estado' => 'Registro actualizados correctamente',
                 ];

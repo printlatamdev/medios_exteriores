@@ -18,10 +18,8 @@ class DashboardController extends Controller
     {
         $user = json_decode(''.Auth::user().'', true);
         $data = [
-            'urlJs' => URL::to('/'), // Each of these methods may also be accessed via the URL facade, tambien 'url' => url('/'), ruta base de laravel via helper
-            'firstName' => $user['first_name'],
-            'lastName' => $user['last_name'],
-            //'nameRole' => $user['roles'][0]['name'],
+            'urlJs' => URL::to('/'),
+            'name' => $user['name'],
         ];
 
         return view('home/dashboard', $data);

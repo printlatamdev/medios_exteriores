@@ -34,14 +34,9 @@ class RegistroUserController extends Controller
     {
         // User::insert
         User::create([
-            'first_name' => $request->nombresUser,
-            'last_name' => $request->apellidosUser,
+            'name' => $request->name,
             'email' => $request->emailUser,
-            'phone_number' => '',
             'password' => Hash::make($request->password),
-            'idpais' => $request->paisUser,
-            'sexo' => $request->sexoUser,
-            'cargo_institucion' => $request->cargoUser,
         ])->assignRole('clientes');
 
         return response()->json(['estado' => 'Datos ingresados exitosamente',
