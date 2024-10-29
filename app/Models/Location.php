@@ -25,8 +25,8 @@ class Location extends Model
         return $this->belongsTo(District::class);
     }
 
-    public function fence()
+    public function externalmedia()
     {
-        return $this->hasMany(Fence::class);
+        return $this->hasMany(Externalmedia::class);
     }
 }

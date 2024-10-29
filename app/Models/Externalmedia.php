@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Fence extends Model
+class Externalmedia extends Model
 {
     protected $fillable = [
-        'code', 'status', 'typefence_id', 'location_id', 'address',
+        'code', 'status', 'mediatype_id', 'location_id', 'address',
     ];
 
-    public function typefence()
+    public function mediatype()
     {
-        return $this->belongsTo(Typefence::class);
+        return $this->belongsTo(Mediatype::class);
     }
 
     public function location()

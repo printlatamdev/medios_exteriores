@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fences', function (Blueprint $table) {
+        Schema::create('externalmedia', function (Blueprint $table) {
             $table->id();
             $table->string('code');
             $table->text('status');
             $table->text('address');
             $table->string('width');
             $table->string('height');
-            $table->foreignId('typefence_id')->constrained();
+            $table->foreignId('mediatype_id')->constrained();
             $table->foreignId('location_id')->constrained();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fences');
+        Schema::dropIfExists('externalmedia');
     }
 };
