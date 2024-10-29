@@ -1,28 +1,28 @@
-<!doctype html>
-
-<head>
-    @include('includes.head')
-</head>
-
-<body style=" background: #F5F5F7">
-    <div id="app" class="overflow-x-hidden">
-        <div class="row">
-            <div class="col-xl-2 col-md-2 d-none d-xl-block p-0">
-                <!--Sidebar-->
-                @include('includes.sidebar')
-            </div>
-            <div class="col-xl-10 col-md-12 col-sm-12 px-0">
-                <!--Header dashboard -->
-                @include('includes.header_dashboard')
-                <!--Loader-->
-                @include('includes.menu_loader')
-               <div class="p-35">
-                    @yield('content')
-               </div>
-            </div>
-        </div>
-    </div>
-    @include('includes.footer')
-</body>
-
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+ 
+        <meta name="application-name" content="{{ config('app.name') }}">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+        <title>{{ config('app.name') }}</title>
+ 
+        <style>
+            [x-cloak] {
+                display: none !important;
+            }
+        </style>
+ 
+        @filamentStyles
+        @vite('resources/css/app.css')
+    </head>
+ 
+    <body class="antialiased">
+        {{ $slot }}
+ 
+        @filamentScripts
+        @vite('resources/js/app.js')
+    </body>
 </html>
