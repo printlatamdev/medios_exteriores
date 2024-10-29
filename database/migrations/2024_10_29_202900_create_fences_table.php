@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->text('status');
+            $table->text('address');
+            $table->string('width');
+            $table->string('height');
             $table->foreignId('typefence_id')->constrained();
             $table->foreignId('location_id')->constrained();
-            $table->text('address');
             $table->timestamps();
         });
     }
