@@ -19,6 +19,7 @@ class ExternalmediaResource extends Resource
     protected static ?string $model = Externalmedia::class;
 
     protected static ?string $modelLabel = 'Medio exterior';
+
     protected static ?string $pluralModelLabel = 'Medios exteriores';
 
     protected static ?string $navigationIcon = 'heroicon-m-rocket-launch';
@@ -27,7 +28,7 @@ class ExternalmediaResource extends Resource
     {
         return $form
             ->schema([
-                Toggle::make('status')->label('Disponibilidad')->onColor('success')->offColor('danger')->inline(true),TextInput::make('code')->label('Código')->required(),
+                Toggle::make('status')->label('Disponibilidad')->onColor('success')->offColor('danger')->inline(true), TextInput::make('code')->label('Código')->required(),
                 Select::make('mediatype_id')
                     ->label('Tipo de medio')
                     ->options(Mediatype::all()->pluck('name', 'id'))
@@ -38,7 +39,7 @@ class ExternalmediaResource extends Resource
                     ->options(Mediatype::all()->pluck('name', 'id'))
                     ->searchable()
                     ->required(), */
-                Textarea::make('address')->label('Dirección')->columnSpan(2)->required()
+                Textarea::make('address')->label('Dirección')->columnSpan(2)->required(),
             ]);
     }
 

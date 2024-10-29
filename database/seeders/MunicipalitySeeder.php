@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Municipality;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MunicipalitySeeder extends Seeder
@@ -14,7 +13,7 @@ class MunicipalitySeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['name' => 'Ahuachapán Norte', 'depto' => 1], 
+            ['name' => 'Ahuachapán Norte', 'depto' => 1],
             ['name' => 'Ahuachapán Centro', 'depto' => 1],
             ['name' => 'Ahuachapán Sur', 'depto' => 1],
             ['name' => 'Cabañas Este', 'depto' => 2],
@@ -44,24 +43,24 @@ class MunicipalitySeeder extends Seeder
             ['name' => 'San Salvador Oeste', 'depto' => 10],
             ['name' => 'San Salvador Este', 'depto' => 10],
             ['name' => 'San Salvador Centro', 'depto' => 10],
-            ['name' =>'San Vicente Norte', 'depto' => 11],
-            ['name' =>'San Vicente Sur', 'depto' => 11],
-            ['name' =>'Santa Ana Norte', 'depto' => 12],
-            ['name' =>'Santa Ana Centro', 'depto' => 12],
-            ['name' =>'Santa Ana Este', 'depto' => 12],
-            ['name' =>'Santa Ana Oeste', 'depto' => 12],
-            ['name' =>'Sonsonate Norte', 'depto' => 13],
-            ['name' =>'Sonsonate Centro', 'depto' => 13],
-            ['name' =>'Sonsonate Este', 'depto' => 13],
-            ['name' =>'Sonsonate Oeste', 'depto' => 13],
-            ['name' =>'Usulután Norte', 'depto' => 14],
-            ['name' =>'Usulután Este', 'depto' => 14],
-            ['name' =>'Usulután Oeste', 'depto' => 14]
+            ['name' => 'San Vicente Norte', 'depto' => 11],
+            ['name' => 'San Vicente Sur', 'depto' => 11],
+            ['name' => 'Santa Ana Norte', 'depto' => 12],
+            ['name' => 'Santa Ana Centro', 'depto' => 12],
+            ['name' => 'Santa Ana Este', 'depto' => 12],
+            ['name' => 'Santa Ana Oeste', 'depto' => 12],
+            ['name' => 'Sonsonate Norte', 'depto' => 13],
+            ['name' => 'Sonsonate Centro', 'depto' => 13],
+            ['name' => 'Sonsonate Este', 'depto' => 13],
+            ['name' => 'Sonsonate Oeste', 'depto' => 13],
+            ['name' => 'Usulután Norte', 'depto' => 14],
+            ['name' => 'Usulután Este', 'depto' => 14],
+            ['name' => 'Usulután Oeste', 'depto' => 14],
         ];
-        foreach($data as $items) {
-            Municipality::create([ 
+        foreach ($data as $items) {
+            Municipality::create([
                 'name' => $items['name'],
-                'department_id' => $items['depto']
+                'department_id' => $items['depto'],
             ]);
         }
     }

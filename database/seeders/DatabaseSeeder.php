@@ -3,11 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 // IMPORT HECHAS POR EL PROGRAMADOR
-use function GuzzleHttp\Promise\each;
 
 class DatabaseSeeder extends Seeder
 {

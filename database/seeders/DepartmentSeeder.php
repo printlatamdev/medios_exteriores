@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Department;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DepartmentSeeder extends Seeder
@@ -13,25 +12,25 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         $data = [
-            'Ahuachapán', 
+            'Ahuachapán',
             'Cabañas',
             'Chalatenango',
-            'Cuscatlán', 
+            'Cuscatlán',
             'La Libertad',
             'La Paz',
             'La Unión',
-            'Morazán', 
-            'San Miguel', 
-            'San Salvador', 
-            'San Vicente', 
-            'Santa Ana', 
-            'Sonsonate', 
+            'Morazán',
+            'San Miguel',
+            'San Salvador',
+            'San Vicente',
+            'Santa Ana',
+            'Sonsonate',
             'Usulután',
         ];
-        foreach($data as $items) {
-            Department::create([ 'name' => $items ]);
+        foreach ($data as $items) {
+            Department::create(['name' => $items]);
         }
     }
 }

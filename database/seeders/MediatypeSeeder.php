@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Mediatype;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MediatypeSeeder extends Seeder
@@ -14,18 +13,18 @@ class MediatypeSeeder extends Seeder
     public function run(): void
     {
         $types = [
-            'Espectacular', 
+            'Espectacular',
             'Standar',
             'Pantalla',
-            'Valla', 
+            'Valla',
             'Muppi',
             'Pasarela',
             'Antena',
         ];
-        foreach($types as $items) {
+        foreach ($types as $items) {
             Mediatype::create([
                 'name' => $items,
-                'description' => 'No description'
+                'description' => 'No description',
             ]);
         }
     }

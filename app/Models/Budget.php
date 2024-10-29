@@ -30,7 +30,6 @@ class Budget extends Model
         'total_payment',
     ];
 
-    
     public function externalmedias()
     {
         return $this->belongsToMany(Externalmedia::class, 'budget_externalmedia');
