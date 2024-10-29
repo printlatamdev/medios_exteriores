@@ -16,7 +16,7 @@
                 @include('includes.header_dashboard')
                 <!--Loader-->
                 @include('includes.menu_loader')
-               <div class="p-25 ">
+               <div class="p-35">
                     @yield('content')
                </div>
             </div>

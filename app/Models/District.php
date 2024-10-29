@@ -8,11 +8,13 @@ class District extends Model
 {
     protected $fillable = ['name', 'municipality_id'];
 
-    public function municipality(){
+    public function municipality()
+    {
         return $this->belongsTo(Municipality::class);
     }
 
-    public function location(){
+    public function location()
+    {
         return $this->hasMany(Location::class);
     }
 }

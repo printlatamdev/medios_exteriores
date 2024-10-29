@@ -8,11 +8,13 @@ class Department extends Model
 {
     protected $fillable = ['name'];
 
-    public function municipality(){
+    public function municipality()
+    {
         return $this->hasMany(Municipality::class);
     }
 
-    public function location(){
+    public function location()
+    {
         return $this->hasMany(Location::class);
     }
 }
