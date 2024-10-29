@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class ExternalmediaController extends Controller
 {
-    //
+    public function index(){
+        
+    }
 }
