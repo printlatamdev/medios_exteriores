@@ -8,6 +8,7 @@ use App\Models\District;
 use App\Models\Externalmedia;
 use App\Models\Mediatype;
 use App\Models\Municipality;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -62,6 +63,9 @@ class ExternalmediaResource extends Resource
                         ->required(),
                     Textarea::make('address')->label('Dirección')->columnSpan(3)->required(),
                 ])->columns(3),
+                Section::make('Multimedia')->schema([
+                    FileUpload::make('gallery')->multiple()->directory('media')->preserveFilenames()->uploadingMessage('Subiendo...')->panelLayout('grid'),
+                ]),
                 Section::make('Medidas')->schema([
                     TextInput::make('width')->label('Ancho'),
                     TextInput::make('height')->label('Alto'),
@@ -91,8 +95,8 @@ class ExternalmediaResource extends Resource
                 Tables\Filters\SelectFilter::make('district')
                     ->label('Distrito')
                     ->searchable()
-                    ->relationship('district', 'name')
-                ])
+                    ->relationship('district', 'name'),
+            ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('width');
             $table->string('height');
+            $table->string('gallery');
             $table->foreignId('mediatype_id')->constrained();
             $table->foreignId('district_id')->constrained();
             $table->timestamps();
