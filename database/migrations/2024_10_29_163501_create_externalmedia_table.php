@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('externalmedia', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->text('status');
+            $table->boolean('status')->default(false);
             $table->text('address');
             $table->string('width');
             $table->string('height');
             $table->foreignId('mediatype_id')->constrained();
-            $table->foreignId('location_id')->constrained();
+            $table->foreignId('district_id')->constrained();
             $table->timestamps();
         });
     }

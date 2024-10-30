@@ -12,6 +12,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class ExternalmediaResource extends Resource
@@ -34,11 +35,13 @@ class ExternalmediaResource extends Resource
                     ->options(Mediatype::all()->pluck('name', 'id'))
                     ->searchable()
                     ->required(),
-                /**Select::make('location_id')
-                    ->label('Tipo de medio')
+                Select::make('district_id')
+                    ->label('Distrito')
                     ->options(Mediatype::all()->pluck('name', 'id'))
                     ->searchable()
-                    ->required(), */
+                    ->required(),
+                TextInput::make('width')->label('Ancho'),
+                TextInput::make('height')->label('Alto'),
                 Textarea::make('address')->label('Dirección')->columnSpan(2)->required(),
             ]);
     }
@@ -48,8 +51,9 @@ class ExternalmediaResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('code'),
+                ToggleColumn::make('status'),
                 Tables\Columns\TextColumn::make('address'),
-                Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('mediatype_id'),
             ])
             ->filters([
                 //

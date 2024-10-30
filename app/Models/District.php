@@ -13,8 +13,8 @@ class District extends Model
         return $this->belongsTo(Municipality::class);
     }
 
-    public function location()
+    public function externalmedia()
     {
-        return $this->hasMany(Location::class);
+        return $this->hasMany(Externalmedia::class);
     }
 }

@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Externalmedia extends Model
 {
     protected $fillable = [
-        'code', 'status', 'mediatype_id', 'location_id', 'address',
+        'code', 'status', 'mediatype_id', 'district_id', 'address', 'width', 'height'
+    ];
+    
+    protected $casts = [
+        'status' => 'boolean',
     ];
 
     public function mediatype()
@@ -15,9 +19,9 @@ class Externalmedia extends Model
         return $this->belongsTo(Mediatype::class);
     }
 
-    public function location()
+    public function district()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(District::class);
     }
 
     public function budgets()
