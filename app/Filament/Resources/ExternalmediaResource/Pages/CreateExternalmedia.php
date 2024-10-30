@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateExternalmedia extends CreateRecord
 {
     protected static string $resource = ExternalmediaResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

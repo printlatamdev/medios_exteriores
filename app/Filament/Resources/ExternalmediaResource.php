@@ -17,8 +17,10 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Columns\ColumnGroup;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class ExternalmediaResource extends Resource
 {
@@ -72,20 +74,36 @@ class ExternalmediaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('code')->label('Código'),
-                ToggleColumn::make('status')->label('Disponibilidad'),
+                Tables\Columns\TextColumn::make('code')->label('Código')->searchable(),
+                IconColumn::make('status')->boolean()->label('Disponibilidad')
+                    ->tooltip(fn (Model $record) => $record->status ? 'Disponible' : 'Medio vendido'),
                 Tables\Columns\TextColumn::make('address')->label('Dirección'),
                 Tables\Columns\TextColumn::make('mediatype.name')->label('Tipo de medio'),
+                Tables\Columns\TextColumn::make('district.name')->label('Distrito'),
+                ColumnGroup::make('Medidas', [
+                    Tables\Columns\TextColumn::make('width')->label('Ancho'),
+                    Tables\Columns\TextColumn::make('height')->label('Alto'),
+                ]),
             ])
             ->filters([
-                //
-            ])
+                Tables\Filters\SelectFilter::make('mediatype')
+                    ->label('Tipo de medio')
+                    ->relationship('mediatype', 'name'),
+                Tables\Filters\SelectFilter::make('district')
+                    ->label('Distrito')
+                    ->searchable()
+                    ->relationship('district', 'name')
+                ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])->tooltip('Acciones'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    // ...
                 ]),
             ]);
     }

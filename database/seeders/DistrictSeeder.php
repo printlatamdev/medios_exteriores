@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\District;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DistrictSeeder extends Seeder
@@ -13,7 +12,7 @@ class DistrictSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         $data = [
             ['name' => 'Atiquizaya', 'mun' => 1],
             ['name' => 'El Refugio', 'mun' => 1],
