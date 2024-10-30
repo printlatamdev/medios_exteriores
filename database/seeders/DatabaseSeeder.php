@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MediatypeSeeder::class);
         $this->call(DepartmentSeeder::class);
         $this->call(MunicipalitySeeder::class);
+        $this->call(DistrictSeeder::class);
     }
 }

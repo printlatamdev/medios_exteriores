@@ -43,6 +43,7 @@ class MunicipalitySeeder extends Seeder
             ['name' => 'San Salvador Oeste', 'depto' => 10],
             ['name' => 'San Salvador Este', 'depto' => 10],
             ['name' => 'San Salvador Centro', 'depto' => 10],
+            ['name' => 'San Salvador Sur', 'depto' => 10],
             ['name' => 'San Vicente Norte', 'depto' => 11],
             ['name' => 'San Vicente Sur', 'depto' => 11],
             ['name' => 'Santa Ana Norte', 'depto' => 12],

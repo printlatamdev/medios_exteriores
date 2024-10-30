@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Externalmedia extends Model
 {
     protected $fillable = [
-        'code', 'status', 'mediatype_id', 'district_id', 'address', 'width', 'height'
+        'code', 'status', 'mediatype_id', 'district_id', 'address', 'width', 'height',
     ];
-    
+
     protected $casts = [
         'status' => 'boolean',
     ];

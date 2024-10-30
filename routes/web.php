@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegistroUserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 /**
 Route::get('/', [RegistroUserController::class, 'index'])->name('login');
 Route::get('/dashboard', [DashboardController::class, 'index']);
