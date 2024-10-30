@@ -49,8 +49,7 @@ class ExternalmediaResource extends Resource
                     Select::make('department_id')
                         ->label('Departamento')
                         ->reactive()
-                        ->options(Department::pluck('name', 'id'))
-                        ->searchable(),
+                        ->options(Department::pluck('name', 'id')),
                     Select::make('municipality_id')
                         ->label('Municipio')
                         ->reactive()

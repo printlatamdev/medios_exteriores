@@ -9,11 +9,13 @@
         "filament/filament": "3.2.57",
         "filament/tables": "3.2.57",
         "guzzlehttp/guzzle": "^7.2",
+        "joaopaulolndev/filament-edit-profile": "^1.0",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.5",
         "owenvoke/blade-fontawesome": "^2.6",
+        "shanerbaner82/panel-roles": "^0.0.3",
         "spatie/laravel-permission": "^6.9"
     },
     "require-dev": {
