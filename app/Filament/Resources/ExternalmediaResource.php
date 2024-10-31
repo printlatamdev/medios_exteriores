@@ -63,13 +63,13 @@ class ExternalmediaResource extends Resource
                         ->required(),
                     Textarea::make('address')->label('Dirección')->columnSpan(3)->required(),
                 ])->columns(3),
-                Section::make('Multimedia')->schema([
-                    FileUpload::make('gallery')->multiple()->directory('media')->preserveFilenames()->uploadingMessage('Subiendo...')->panelLayout('grid'),
-                ]),
                 Section::make('Medidas')->schema([
                     TextInput::make('width')->label('Ancho'),
                     TextInput::make('height')->label('Alto'),
                 ])->columns(2),
+                Section::make('Multimedia')->schema([
+                    FileUpload::make('gallery')->multiple()->directory('media')->preserveFilenames()->uploadingMessage('Subiendo...')->panelLayout('grid'),
+                ]),
             ]);
     }
 
@@ -104,10 +104,7 @@ class ExternalmediaResource extends Resource
                 ])->tooltip('Acciones'),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    // ...
-                ]),
+
             ]);
     }
 

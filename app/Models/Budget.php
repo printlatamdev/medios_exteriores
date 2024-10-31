@@ -20,6 +20,7 @@ class Budget extends Model
         'expiration_date_rental',
         'payment_date_rental',
         'total_maintenance',
+        'maintenance_description',
         'illuminated',
         'electricity_provider',
         'electricity_NIC_NIS',
