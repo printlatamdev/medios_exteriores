@@ -10,7 +10,7 @@ class Budget extends Model
         'expiration_date_bail',
         'payment_date_bail',
         'total_bail',
-        
+
         'expiration_date_damageinsurance',
         'payment_date_damageinsurance',
         'total_damageinsurance',
@@ -24,7 +24,7 @@ class Budget extends Model
         'total_rental',
 
         'maintenance_description',
-        'total_maintenance',        
+        'total_maintenance',
 
         'illuminated',
         'electricity_provider',

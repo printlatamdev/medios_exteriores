@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BudgetResource\Pages;
 use App\Models\Budget;
+use App\Models\Externalmedia;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -12,7 +13,10 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ColumnGroup;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 
 class BudgetResource extends Resource
@@ -30,6 +34,10 @@ class BudgetResource extends Resource
         return $form
             ->schema([
                 TextInput::make('total_payment')->label('Total de gasto'),
+                Select::make('externalmedia_id')
+                    ->label('Medio externo')
+                    ->options(Externalmedia::pluck('code', 'id'))
+                    ->searchable(),
                 Section::make('Fianza')->schema([
                     DatePicker::make('expiration_date_bail')->label('Fecha de vencimiento'),
                     DatePicker::make('payment_date_bail')->label('Fecha de pago'),
@@ -77,7 +85,38 @@ class BudgetResource extends Resource
     {
         return $table
             ->columns([
-                //
+                ColumnGroup::make('Fianza', [
+                    TextColumn::make('expiration_date_bail')->label('Fecha de vencimiento fianza'),
+                    TextColumn::make('payment_date_bail')->label('Fecha de cancelada fianza'),
+                    TextColumn::make('total_bail')->label('Total de fianza'),
+                ]),
+                ColumnGroup::make('Medidas', [
+                    TextColumn::make('expiration_date_damageinsurance')->label('Fecha de vencimiento seguro'),
+                    TextColumn::make('payment_date_damageinsurance')->label('Fecha de cancelado seguro'),
+                    TextColumn::make('total_damageinsurance')->label('Total de seguro'),
+                ]),
+                ColumnGroup::make('Alcaldía', [
+                    TextColumn::make('expiration_date_municipality')->label('Fecha de vencimiento alcaldía'),
+                    TextColumn::make('payment_date_municipality')->label('Fecha de cancelada alcaldía'),
+                    TextColumn::make('total_municipality')->label('Total de alcaldía'),
+                ]),
+                ColumnGroup::make('Alcaldía', [
+                    TextColumn::make('expiration_date_rental')->label('Fecha de vencimiento arrendamiento'),
+                    TextColumn::make('payment_date_rental')->label('Fecha de pago arrendamiento'),
+                    TextColumn::make('total_rental')->label('Total de arrendamiento'),
+                ]),
+                ColumnGroup::make('Manteniemto', [
+                    TextColumn::make('maintenance_description')->label('Fecha de vencimiento mantenimiento'),
+                    TextColumn::make('total_maintenance')->label('Total de mantenimiento'),
+                ]),
+                ColumnGroup::make('Energía eléctrica', [
+                    TextColumn::make('electricity_provider')->label('Proveedor'),
+                    TextColumn::make('electricity_NIC_NIS')->label('NIC/NIS'),
+                    TextColumn::make('electricity_new_NC')->label('Nuevo NC'),
+                    TextColumn::make('expiration_date_electricity')->label('Fecha de vencimiento de energía'),
+                    TextColumn::make('payment_date_electricity')->label('Fecha de pago de energía'),
+                    TextColumn::make('total_electricity')->label('Total de energía'),
+                ]),
             ])
             ->filters([
                 //

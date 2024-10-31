@@ -8,6 +8,7 @@ use App\Models\District;
 use App\Models\Externalmedia;
 use App\Models\Mediatype;
 use App\Models\Municipality;
+use ArberMustafa\FilamentLocationPickrField\Forms\Components\LocationPickr;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -46,34 +47,49 @@ class ExternalmediaResource extends Resource
                         ->required(),
                     Toggle::make('status')->label('Disponibilidad')->onColor('success')->offColor('danger')->inline(false),
                 ])->columns(3),
+                Section::make('Multimedia')->schema([
+                    FileUpload::make('gallery')->multiple()->directory('media')->label('Galería de medios')->preserveFilenames()->uploadingMessage('Subiendo...')->panelLayout('grid'),
+                ]),
                 Section::make('Ubicación detallada')->schema([
                     Select::make('department_id')
                         ->label('Departamento')
                         ->reactive()
-                        ->options(Department::pluck('name', 'id')),
+                        ->options(Department::pluck('name', 'id'))
+                        ->columnSpan(1),
                     Select::make('municipality_id')
                         ->label('Municipio')
                         ->reactive()
                         ->options(fn (Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
-                        ->searchable(),
+                        ->searchable()
+                        ->columnSpan(1),
                     Select::make('district_id')
                         ->label('Distrito')
                         ->options(fn (Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
                         ->searchable()
-                        ->required(),
+                        ->required()
+                        ->columnSpan(1),
                     Textarea::make('address')->label('Dirección')->columnSpan(3)->required(),
+                    LocationPickr::make('location')
+                        ->label('Locación')
+                        ->mapControls([
+                            'mapTypeControl' => true,
+                            'scaleControl' => true,
+                            'streetViewControl' => true,
+                            'rotateControl' => true,
+                            'fullscreenControl' => true,
+                            'zoomControl' => false,
+                        ])
+                        ->myLocationButtonLabel('Mapa')
+                        ->defaultZoom(5)
+                        ->draggable()
+                        ->clickable()
+                        ->defaultLocation([13.677066932239907, -89.19176963659241])
+                        ->columnSpan(3),
                 ])->columns(3),
                 Section::make('Medidas')->schema([
                     TextInput::make('width')->label('Ancho'),
                     TextInput::make('height')->label('Alto'),
                 ])->columns(2),
-                Section::make('Coordenadas')->schema([
-                    TextInput::make('')->label('Ancho'),
-                    TextInput::make('height')->label('Alto'),
-                ])->columns(2),
-                Section::make('Multimedia')->schema([
-                    FileUpload::make('gallery')->multiple()->directory('media')->preserveFilenames()->uploadingMessage('Subiendo...')->panelLayout('grid'),
-                ]),
             ]);
     }
 

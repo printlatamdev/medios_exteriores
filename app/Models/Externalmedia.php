@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Externalmedia extends Model
 {
+    protected $table = 'externalmedia';
+
     protected $fillable = [
         'code', 'status', 'mediatype_id', 'district_id', 'address', 'location', 'gallery', 'width', 'height',
     ];
@@ -14,9 +16,15 @@ class Externalmedia extends Model
         'status' => 'boolean',
         'gallery' => 'array',
     ];
+
     protected $appends = [
         'location',
+        'code_address'
     ];
+
+    public function getCodeAddressAttribute(){
+        return $this->code . ' ' . $this->address;
+    }
 
     public function mediatype()
     {
