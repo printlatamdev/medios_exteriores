@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Externalmedia extends Model
 {
     protected $fillable = [
-        'code', 'status', 'mediatype_id', 'district_id', 'address', 'gallery', 'width', 'height',
+        'code', 'status', 'mediatype_id', 'district_id', 'address', 'location', 'gallery', 'width', 'height',
     ];
 
     protected $casts = [
         'status' => 'boolean',
         'gallery' => 'array',
+    ];
+    protected $appends = [
+        'location',
     ];
 
     public function mediatype()

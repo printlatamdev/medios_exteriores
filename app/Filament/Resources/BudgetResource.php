@@ -29,6 +29,7 @@ class BudgetResource extends Resource
     {
         return $form
             ->schema([
+                TextInput::make('total_payment')->label('Total de gasto'),
                 Section::make('Fianza')->schema([
                     DatePicker::make('expiration_date_bail')->label('Fecha de vencimiento'),
                     DatePicker::make('payment_date_bail')->label('Fecha de pago'),

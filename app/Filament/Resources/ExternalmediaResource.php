@@ -67,6 +67,10 @@ class ExternalmediaResource extends Resource
                     TextInput::make('width')->label('Ancho'),
                     TextInput::make('height')->label('Alto'),
                 ])->columns(2),
+                Section::make('Coordenadas')->schema([
+                    TextInput::make('')->label('Ancho'),
+                    TextInput::make('height')->label('Alto'),
+                ])->columns(2),
                 Section::make('Multimedia')->schema([
                     FileUpload::make('gallery')->multiple()->directory('media')->preserveFilenames()->uploadingMessage('Subiendo...')->panelLayout('grid'),
                 ]),

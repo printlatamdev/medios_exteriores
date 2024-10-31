@@ -18,6 +18,9 @@ return new class extends Migration
             $table->text('address');
             $table->string('width');
             $table->string('height');
+            $table->string('latitude');
+            $table->string('altitude');
+            $table->json('location')->nullable();
             $table->string('gallery');
             $table->foreignId('mediatype_id')->constrained();
             $table->foreignId('district_id')->constrained();
