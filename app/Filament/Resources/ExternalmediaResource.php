@@ -66,12 +66,12 @@ class ExternalmediaResource extends Resource
                     Select::make('municipality_id')
                         ->label('Municipio')
                         ->reactive()
-                        ->options(fn(Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
+                        ->options(fn (Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->columnSpan(1),
                     Select::make('district_id')
                         ->label('Distrito')
-                        ->options(fn(Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
+                        ->options(fn (Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->required()
                         ->columnSpan(1),
@@ -106,7 +106,7 @@ class ExternalmediaResource extends Resource
             ->columns([
                 TextColumn::make('code')->label('Código')->searchable(),
                 IconColumn::make('status')->boolean()->label('Disponibilidad')
-                    ->tooltip(fn(Model $record) => $record->status ? 'Disponible' : 'Medio vendido'),
+                    ->tooltip(fn (Model $record) => $record->status ? 'Disponible' : 'Medio vendido'),
                 TextColumn::make('address')->label('Dirección'),
                 TextColumn::make('mediatype.name')->label('Tipo de medio'),
                 TextColumn::make('district.name')->label('Distrito'),

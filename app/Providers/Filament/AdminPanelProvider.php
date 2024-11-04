@@ -34,8 +34,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugin(
                 PanelRoles::make()
-                    ->roleToAssign('admin')
-                    ->restrictedRoles(['admin']),
+                    ->roleToAssign('Superadmin')
+                    ->restrictedRoles(['Superadmin', 'Ventas']),
                 FilamentEditProfilePlugin::make()
             )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

@@ -19,11 +19,12 @@ class Externalmedia extends Model
 
     protected $appends = [
         'location',
-        'code_address'
+        'code_address',
     ];
 
-    public function getCodeAddressAttribute(){
-        return $this->code . ' ' . $this->address;
+    public function getCodeAddressAttribute()
+    {
+        return $this->code.' '.$this->address;
     }
 
     public function mediatype()

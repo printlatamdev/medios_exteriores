@@ -37,7 +37,7 @@ class RegistroUserController extends Controller
             'name' => $request->name,
             'email' => $request->emailUser,
             'password' => Hash::make($request->password),
-        ])->assignRole('clientes');
+        ])->assignRole('Ventas');
 
         return response()->json(['estado' => 'Datos ingresados exitosamente',
             'redirect' => 'usuario/login',
