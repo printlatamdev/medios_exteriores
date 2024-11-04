@@ -4,12 +4,14 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Spatie\Permission\Models\Role;
 
 class UserResource extends Resource
 {
@@ -28,7 +30,11 @@ class UserResource extends Resource
                 TextInput::make('name')->label('Nombre completo'),
                 TextInput::make('email')->label('Correo electrónico'),
                 TextInput::make('password')->label('Contraseña')->password()->revealable(),
-            ])->columns(3);
+                Select::make('roles')
+                    ->multiple()
+                    ->options(Role::pluck('name', 'id'))
+                    ->label('Roles'),
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -37,6 +43,12 @@ class UserResource extends Resource
             ->columns([
                 TextColumn::make('name')->label('Nombre'),
                 TextColumn::make('email')->label('Correo eletrónico'),
+                TextColumn::make('roles.name')->label('Roles')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Superadmin' => 'success',
+                        'Ventas' => 'info',
+                    }),
             ])
             ->filters([
                 //

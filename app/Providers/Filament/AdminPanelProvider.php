@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -18,7 +19,6 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
-use Shanerbaner82\PanelRoles\PanelRoles;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -29,15 +29,14 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('')
             ->login()
-            ->colors([
-                'primary' => Color::Green,
-            ])
+            ->colors(['primary' => Color::Green])
             ->plugin(
-                PanelRoles::make()
-                    ->roleToAssign('Superadmin')
-                    ->restrictedRoles(['Superadmin', 'Ventas']),
-                FilamentEditProfilePlugin::make()
+                //FilamentEditProfilePlugin::make(),
+                FilamentSpatieRolesPermissionsPlugin::make()
             )
+            ->plugin(FilamentEditProfilePlugin::make())
+            ->registrationRouteSlug('register')
+            ->passwordResetRoutePrefix('password-reset')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
