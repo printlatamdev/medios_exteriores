@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->boolean('status')->default(false);
-            $table->text('address');
-            $table->string('width');
-            $table->string('height');
-            $table->string('gallery');
+            $table->text('address')->nullable();
+            $table->string('width')->nullable();
+            $table->string('height')->nullable();
+            $table->string('gallery')->nullable();
             $table->json('location')->nullable();
             $table->foreignId('mediatype_id')->constrained();
             $table->foreignId('district_id')->constrained();

@@ -30,10 +30,11 @@ class UserResource extends Resource
                 TextInput::make('name')->label('Nombre completo'),
                 TextInput::make('email')->label('Correo electrónico'),
                 TextInput::make('password')->label('Contraseña')->password()->revealable(),
-                Select::make('roles')
+                Select::make('roles')->multiple()->relationship('roles', 'name')
+                /*Select::make('roles')
                     ->multiple()
                     ->options(Role::pluck('name', 'id'))
-                    ->label('Roles'),
+                    ->label('Roles'),*/
             ]);
     }
 
