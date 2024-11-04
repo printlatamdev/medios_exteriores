@@ -19,6 +19,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -129,6 +130,12 @@ class ExternalmediaResource extends Resource
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ])->tooltip('Acciones'),
+                CreateAction::make('mediaImport')
+                    ->label('Importar medios')
+                    ->color('info')
+                    ->form([
+                        FileUpload::make('attachment'),
+                    ]),
             ])
             ->bulkActions([]);
     }
