@@ -21,6 +21,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,7 +49,13 @@ class ExternalmediaResource extends Resource
                     Toggle::make('status')->label('Disponibilidad')->onColor('success')->offColor('danger')->inline(false),
                 ])->columns(3),
                 Section::make('Multimedia')->schema([
-                    FileUpload::make('gallery')->multiple()->directory('media')->label('Galería de medios')->preserveFilenames()->uploadingMessage('Subiendo...')->panelLayout('grid'),
+                    FileUpload::make('gallery')
+                        ->multiple()
+                        ->directory('media')
+                        ->label('Galería de medios')
+                        ->preserveFilenames()
+                        ->image()
+                        ->panelLayout('grid'),
                 ]),
                 Section::make('Ubicación detallada')->schema([
                     Select::make('department_id')
@@ -59,12 +66,12 @@ class ExternalmediaResource extends Resource
                     Select::make('municipality_id')
                         ->label('Municipio')
                         ->reactive()
-                        ->options(fn (Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
+                        ->options(fn(Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->columnSpan(1),
                     Select::make('district_id')
                         ->label('Distrito')
-                        ->options(fn (Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
+                        ->options(fn(Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->required()
                         ->columnSpan(1),
@@ -97,15 +104,15 @@ class ExternalmediaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('code')->label('Código')->searchable(),
+                TextColumn::make('code')->label('Código')->searchable(),
                 IconColumn::make('status')->boolean()->label('Disponibilidad')
-                    ->tooltip(fn (Model $record) => $record->status ? 'Disponible' : 'Medio vendido'),
-                Tables\Columns\TextColumn::make('address')->label('Dirección'),
-                Tables\Columns\TextColumn::make('mediatype.name')->label('Tipo de medio'),
-                Tables\Columns\TextColumn::make('district.name')->label('Distrito'),
+                    ->tooltip(fn(Model $record) => $record->status ? 'Disponible' : 'Medio vendido'),
+                TextColumn::make('address')->label('Dirección'),
+                TextColumn::make('mediatype.name')->label('Tipo de medio'),
+                TextColumn::make('district.name')->label('Distrito'),
                 ColumnGroup::make('Medidas', [
-                    Tables\Columns\TextColumn::make('width')->label('Ancho'),
-                    Tables\Columns\TextColumn::make('height')->label('Alto'),
+                    TextColumn::make('width')->label('Ancho'),
+                    TextColumn::make('height')->label('Alto'),
                 ]),
             ])
             ->filters([
@@ -123,9 +130,7 @@ class ExternalmediaResource extends Resource
                     Tables\Actions\DeleteAction::make(),
                 ])->tooltip('Acciones'),
             ])
-            ->bulkActions([
-
-            ]);
+            ->bulkActions([]);
     }
 
     public static function getRelations(): array

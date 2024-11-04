@@ -77,7 +77,7 @@ class BudgetResource extends Resource
                     DatePicker::make('expiration_date_electricity')->label('Fecha de vencimiento'),
                     DatePicker::make('payment_date_electricity')->label('Fecha de pago'),
                     MoneyInput::make('total_electricity')->label('Total'),
-                ])->columns(4),
+                ])->columns(3),
             ]);
     }
 
