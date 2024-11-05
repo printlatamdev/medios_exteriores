@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserResource extends Resource
 {
@@ -34,7 +35,7 @@ class UserResource extends Resource
                     ->revealable()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn (?string $state): bool => filled($state)),
-                Select::make('roles')->multiple()->relationship('roles', 'name'),
+                Select::make('roles')->multiple()->relationship('roles', 'name')->options(Role::pluck('name', 'id')),
             ]);
     }
 

@@ -32,11 +32,12 @@ class BudgetResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('total_payment')->label('Total de gasto'),
                 Select::make('externalmedia_id')
                     ->label('Medio externo')
+                    ->relationship('externalmedias', 'code')
                     ->options(Externalmedia::pluck('code', 'id'))
                     ->searchable(),
+                TextInput::make('total_payment')->label('Total de gasto')->disabled(),
                 Section::make('Fianza')->schema([
                     DatePicker::make('expiration_date_bail')->label('Fecha de vencimiento'),
                     DatePicker::make('payment_date_bail')->label('Fecha de pago'),
@@ -59,7 +60,7 @@ class BudgetResource extends Resource
                 ])->columns(3),
                 Section::make('Mantenimiento')->schema([
                     Textarea::make('maintenance_description')->label('Descripción de mantenimiento')->columnSpan(2),
-                    MoneyInput::make('total_maintenance')->label('Fecha de vencimiento'),
+                    MoneyInput::make('total_maintenance')->label('Total'),
                 ])->columns(3),
                 Section::make('Energía eléctrica')->schema([
                     Select::make('electricity_provider')
@@ -84,6 +85,7 @@ class BudgetResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('externalmedia')->label('Medio'),
                 ColumnGroup::make('Fianza', [
                     TextColumn::make('expiration_date_bail')->label('Fecha de vencimiento fianza'),
                     TextColumn::make('payment_date_bail')->label('Fecha de cancelada fianza'),
@@ -127,9 +129,7 @@ class BudgetResource extends Resource
                 ])->tooltip('Acciones'),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                
             ]);
     }
 

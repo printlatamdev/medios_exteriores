@@ -105,8 +105,14 @@ class ExternalmediaResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('code')->label('Código')->searchable(),
-                IconColumn::make('status')->boolean()->label('Disponibilidad')
-                    ->tooltip(fn (Model $record) => $record->status ? 'Disponible' : 'Medio vendido'),
+                IconColumn::make('status')
+                    ->boolean()
+                    ->label('Disponibilidad')
+                    ->tooltip(fn (Model $record) => $record->status ? 'Medio vendido' : 'Disponible' )
+                    ->falseIcon('far-circle-check')                    
+                    ->trueIcon('far-circle-xmark')
+                    ->trueColor('warning')
+                    ->falseColor('success'),
                 TextColumn::make('address')->label('Dirección'),
                 TextColumn::make('mediatype.name')->label('Tipo de medio'),
                 TextColumn::make('district.name')->label('Distrito'),
@@ -118,11 +124,13 @@ class ExternalmediaResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('mediatype')
                     ->label('Tipo de medio')
-                    ->relationship('mediatype', 'name'),
+                    ->relationship('mediatype', 'name')
+                    ->options(Mediatype::pluck('name', 'id')),
                 Tables\Filters\SelectFilter::make('district')
                     ->label('Distrito')
                     ->searchable()
-                    ->relationship('district', 'name'),
+                    ->relationship('district', 'name')
+                    ->options(District::pluck('name', 'id')),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
