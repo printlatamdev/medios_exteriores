@@ -3,10 +3,11 @@
 namespace App\Filament\Resources\ExternalmediaResource\Pages;
 
 use App\Filament\Resources\ExternalmediaResource;
+use App\Imports\MediaImport;
 use EightyNine\ExcelImport\ExcelImportAction;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use App\Imports\MediaImport;
+use Illuminate\Database\Eloquent\Collection;
 
 class ListExternalmedia extends ListRecords
 {
@@ -15,12 +16,12 @@ class ListExternalmedia extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
             ExcelImportAction::make()
-                ->slideOver()
+                //->slideOver()
                 ->use(MediaImport::class)
-                ->color("warning")
+                ->color('warning')
                 ->label('Importar'),
+            Actions\CreateAction::make(),
         ];
     }
 }

@@ -19,8 +19,6 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\CreateAction;
-use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -133,7 +131,7 @@ class ExternalmediaResource extends Resource
                 ])->tooltip('Acciones'),
             ])
             ->bulkActions([
-                
+
             ]);
     }
 

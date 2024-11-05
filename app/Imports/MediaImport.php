@@ -2,48 +2,42 @@
 
 namespace App\Imports;
 
-use App\Models\District;
 use App\Models\Externalmedia;
 use Illuminate\Support\Collection;
-use App\Models\Mediatype;
-use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class MediaImport implements ToCollection
+class MediaImport implements ToModel
 {
-    use Importable;
     /**
      * @param  Collection  $collection
      */
-    public function collection(Collection $rows)
+    public function model(array $row)
     {
-        foreach ($rows as $row) {
-            dd($row);
-            Externalmedia::create([
-                'code' => $row[0],
-                'status' => $row[1],
-                'mediatype_id' => $row[2],
-                'district_id' => $row[3],
-                'address' => $row[4],
-                'location' => $row[5],
-                'gallery' => $row[6],
-                'width' => $row[7],
-                'height' => $row[8],
-            ]);
-        }
+       return new Externalmedia([
+            'code' => $row[0],
+            'status' => $row[1],
+            'mediatype_id' => $row[2],
+            'district_id' => $row[3],
+            'address' => $row[4],
+            'location' => $row[5],
+            'gallery' => $row[6],
+            'width' => $row[7],
+            'height' => $row[8],
+        ]);
+    }
+    /**
+    public function batchSize(): int
+    {
+        return 4000;
     }
 
-    public function getMediatypeId($mediatype)
+    public function chunkSize(): int
     {
-        $mediatype = Mediatype::where('name', $mediatype)->get();
-
-        return $mediatype->id;
+        return 4000;
     }
-
-    public function getDistrictId($district)
-    {
-        $district = District::where('name', $district)->get();
-
-        return $district->id;
-    }
+     */
 }
