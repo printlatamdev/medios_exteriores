@@ -30,8 +30,11 @@ class AdminPanelProvider extends PanelProvider
             ->path('')
             ->login()
             ->colors(['primary' => Color::Green])
-            ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
-            ->plugin(FilamentEditProfilePlugin::make())
+            //->plugin(FilamentSpatieRolesPermissionsPlugin::make())
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                FilamentEditProfilePlugin::make(),    
+            ])
             ->registrationRouteSlug('register')
             ->passwordResetRoutePrefix('password-reset')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

@@ -85,7 +85,7 @@ class BudgetResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('externalmedia')->label('Medio'),
+                TextColumn::make('externalmedias.code')->label('Medio'),
                 ColumnGroup::make('Fianza', [
                     TextColumn::make('expiration_date_bail')->label('Fecha de vencimiento fianza'),
                     TextColumn::make('payment_date_bail')->label('Fecha de cancelada fianza'),
@@ -101,7 +101,7 @@ class BudgetResource extends Resource
                     TextColumn::make('payment_date_municipality')->label('Fecha de cancelada alcaldía'),
                     TextColumn::make('total_municipality')->label('Total de alcaldía'),
                 ]),
-                ColumnGroup::make('Alcaldía', [
+                ColumnGroup::make('Arrenfamiento', [
                     TextColumn::make('expiration_date_rental')->label('Fecha de vencimiento arrendamiento'),
                     TextColumn::make('payment_date_rental')->label('Fecha de pago arrendamiento'),
                     TextColumn::make('total_rental')->label('Total de arrendamiento'),

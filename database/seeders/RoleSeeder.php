@@ -17,17 +17,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Role::create(['name' => 'Superadmin', 'guard_name' => 'web']);
-        $ventas = Role::create(['name' => 'Ventas', 'guard_name' => 'web']);
-
-        Permission::create(['name' => 'dashboard'])->syncRoles([$admin, $ventas]);
-        Permission::create(['name' => 'users.index'])->syncRoles([$admin, $ventas]);
-        Permission::create(['name' => 'users.show'])->syncRoles([$admin, $ventas]);
-        Permission::create(['name' => 'users.create'])->syncRoles([$admin]);
-        Permission::create(['name' => 'users.store'])->syncRoles([$admin]);
-        Permission::create(['name' => 'users.edit'])->syncRoles([$admin]);
-        Permission::create(['name' => 'users.update'])->syncRoles([$admin]);
-        Permission::create(['name' => 'users.destroy'])->syncRoles([$admin]);
-
+        Role::create(['name' => 'Superadmin', 'guard_name' => 'web']);
+        Role::create(['name' => 'Ventas', 'guard_name' => 'web']);
     }
 }
