@@ -4,28 +4,33 @@ namespace App\Imports;
 
 use App\Models\District;
 use App\Models\Externalmedia;
-use App\Models\Mediatype;
 use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToModel;
+use App\Models\Mediatype;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\ToCollection;
 
-class MediaImport implements ToModel
+class MediaImport implements ToCollection
 {
+    use Importable;
     /**
      * @param  Collection  $collection
      */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        return new Externalmedia([
-            'code' => $row['code'],
-            'status' => $row['status'],
-            'mediatype_id' => $row['mediatype_id'],
-            'district_id' => $row['district_id'],
-            'address' => $row['address'],
-            'location' => $row['location'],
-            'gallery' => $row['gallery'],
-            'width' => $row['width'],
-            'height' => $row['height'],
-        ]);
+        foreach ($rows as $row) {
+            dd($row);
+            Externalmedia::create([
+                'code' => $row[0],
+                'status' => $row[1],
+                'mediatype_id' => $row[2],
+                'district_id' => $row[3],
+                'address' => $row[4],
+                'location' => $row[5],
+                'gallery' => $row[6],
+                'width' => $row[7],
+                'height' => $row[8],
+            ]);
+        }
     }
 
     public function getMediatypeId($mediatype)

@@ -3,8 +3,10 @@
 namespace App\Filament\Resources\ExternalmediaResource\Pages;
 
 use App\Filament\Resources\ExternalmediaResource;
+use EightyNine\ExcelImport\ExcelImportAction;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use App\Imports\MediaImport;
 
 class ListExternalmedia extends ListRecords
 {
@@ -14,6 +16,11 @@ class ListExternalmedia extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            ExcelImportAction::make()
+                ->slideOver()
+                ->use(MediaImport::class)
+                ->color("warning")
+                ->label('Importar'),
         ];
     }
 }

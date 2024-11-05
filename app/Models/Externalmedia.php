@@ -15,10 +15,11 @@ class Externalmedia extends Model
     protected $casts = [
         'status' => 'boolean',
         'gallery' => 'array',
+        'location' => 'json'
     ];
 
     protected $appends = [
-        'location',
+        //'location',
         'code_address',
     ];
 

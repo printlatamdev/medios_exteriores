@@ -11,7 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -29,12 +29,12 @@ class UserResource extends Resource
             ->schema([
                 TextInput::make('name')->label('Nombre completo'),
                 TextInput::make('email')->label('Correo electrónico'),
-                TextInput::make('password')->label('Contraseña')->password()->revealable(),
+                TextInput::make('password')->label('Contraseña')
+                    ->password()
+                    ->revealable()
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn (?string $state): bool => filled($state)),
                 Select::make('roles')->multiple()->relationship('roles', 'name'),
-                /*Select::make('roles')
-                    ->multiple()
-                    ->options(Role::pluck('name', 'id'))
-                    ->label('Roles'),*/
             ]);
     }
 
