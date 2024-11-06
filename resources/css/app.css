@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+[x-cloak] {
+    display: none;
+}
+
+.montserrat {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.customize-table {
+    border-radius: 7px;
+    --easy-table-header-font-size: 13px;
+    --easy-table-body-row-font-color: #424242;
+    --easy-table-body-row-font-size: 13px;
+}
