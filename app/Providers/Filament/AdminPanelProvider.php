@@ -36,7 +36,10 @@ class AdminPanelProvider extends PanelProvider
             ->colors(['primary' => Color::Green])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                FilamentEditProfilePlugin::make(),    
+                FilamentEditProfilePlugin::make()
+                    ->setIcon('ri-profile-fill')
+                    ->setNavigationGroup('Manejo de usuarios')
+                    ->shouldShowAvatarForm(),    
             ])
             ->registrationRouteSlug('register')
             ->passwordResetRoutePrefix('password-reset')

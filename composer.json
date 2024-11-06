@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "althinect/filament-spatie-roles-permissions": "^2.2",
+        "andreiio/blade-remix-icon": "^3.5",
         "arbermustafa/filament-locationpickr-field": "2.0.0",
         "bezhansalleh/filament-shield": "^3.2",
         "eightynine/filament-excel-import": "^3.1",

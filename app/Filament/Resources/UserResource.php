@@ -20,6 +20,8 @@ class UserResource extends Resource
 
     protected static ?string $modelLabel = 'Usuario';
 
+    protected static ?string $navigationGroup = 'Manejo de usuarios';
+
     protected static ?string $pluralModelLabel = 'Usuarios';
 
     protected static ?string $navigationIcon = 'fas-user-circle';
@@ -48,8 +50,8 @@ class UserResource extends Resource
                 TextColumn::make('roles.name')->label('Roles')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'Superadmin' => 'success',
-                        'Ventas' => 'info',
+                        'super_admin' => 'success',
+                        //'Ventas' => 'info',
                     }),
             ])
             ->filters([
