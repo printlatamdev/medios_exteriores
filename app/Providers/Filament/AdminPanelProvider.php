@@ -29,8 +29,11 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('')
             ->login()
+            ->brandName('Color Digital')
+            ->brandLogo(asset('assets/images/logo.jpg'))
+            ->favicon(asset('assets/images/color.ico'))
+            ->brandLogoHeight('3rem')
             ->colors(['primary' => Color::Green])
-            //->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 FilamentEditProfilePlugin::make(),    
@@ -48,7 +51,6 @@ class AdminPanelProvider extends PanelProvider
                 //Widgets\FilamentInfoWidget::class,
             ])
             ->spa()
-            ->brandLogo(asset('assets/images/logo.jpg'))
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
