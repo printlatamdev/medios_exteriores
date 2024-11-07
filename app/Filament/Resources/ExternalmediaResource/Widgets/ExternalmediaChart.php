@@ -2,16 +2,26 @@
 
 namespace App\Filament\Resources\ExternalmediaResource\Widgets;
 
+use App\Models\Externalmedia;
 use Filament\Widgets\ChartWidget;
+use Flowframe\Trend\Trend;
+use Flowframe\Trend\TrendValue;
 
 class ExternalmediaChart extends ChartWidget
 {
-    protected static ?string $heading = 'Chart';
+    protected static ?string $heading = 'Medios externos por distrito';
 
     protected static ?string $maxHeight = '500px';
 
     protected function getData(): array
     {
+        $media = Trend::query(Externalmedia::groupBy('mediatype_id'))
+            ->between(
+                start: now()->startOfYear(),
+                end: now()->endOfYear(),
+            )
+            ->perMonth()
+            ->count();
         return [
             'datasets' => [
                 [
@@ -21,7 +31,7 @@ class ExternalmediaChart extends ChartWidget
                     'borderColor' => '#9BD0F5',
                 ],
             ],
-            'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            'labels' => $media->map(fn (TrendValue $value) => $value),
         ];
     }
 
