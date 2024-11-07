@@ -37,7 +37,7 @@ class BudgetResource extends Resource
                     ->relationship('externalmedias', 'code')
                     ->options(Externalmedia::pluck('code', 'id'))
                     ->searchable(),
-                TextInput::make('total_payment')->label('Total de gasto')->disabled(),
+                MoneyInput::make('total_payment')->label('Total de gasto')->disabled(),
                 Section::make('Fianza')->schema([
                     DatePicker::make('expiration_date_bail')->label('Fecha de vencimiento'),
                     DatePicker::make('payment_date_bail')->label('Fecha de pago'),
@@ -101,7 +101,7 @@ class BudgetResource extends Resource
                     TextColumn::make('payment_date_municipality')->label('Fecha de cancelada alcaldía'),
                     TextColumn::make('total_municipality')->label('Total de alcaldía'),
                 ]),
-                ColumnGroup::make('Arrenfamiento', [
+                ColumnGroup::make('Arrendamiento', [
                     TextColumn::make('expiration_date_rental')->label('Fecha de vencimiento arrendamiento'),
                     TextColumn::make('payment_date_rental')->label('Fecha de pago arrendamiento'),
                     TextColumn::make('total_rental')->label('Total de arrendamiento'),

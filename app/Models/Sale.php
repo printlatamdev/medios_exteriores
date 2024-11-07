@@ -12,7 +12,7 @@ class Sale extends Model
         'total_rental',
         'tarp_date_change',
         'total_tarp',
-        'total'
+        'total',
     ];
 
     public function externalmedias()

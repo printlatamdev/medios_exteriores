@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->date('tarp_date_change')->nullable();
             $table->decimal('total_tarp', 11, 2)->nullable();
-            
+
             $table->decimal('total', 11, 2)->nullable();
             $table->timestamps();
         });
