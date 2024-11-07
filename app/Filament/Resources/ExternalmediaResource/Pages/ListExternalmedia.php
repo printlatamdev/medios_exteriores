@@ -7,7 +7,6 @@ use App\Imports\MediaImport;
 use EightyNine\ExcelImport\ExcelImportAction;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Database\Eloquent\Collection;
 
 class ListExternalmedia extends ListRecords
 {

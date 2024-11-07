@@ -129,7 +129,7 @@ class BudgetResource extends Resource
                 ])->tooltip('Acciones'),
             ])
             ->bulkActions([
-                
+
             ]);
     }
 

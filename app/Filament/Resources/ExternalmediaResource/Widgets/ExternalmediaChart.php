@@ -2,10 +2,7 @@
 
 namespace App\Filament\Resources\ExternalmediaResource\Widgets;
 
-use App\Models\District;
-use App\Models\Externalmedia;
 use Filament\Widgets\ChartWidget;
-use Flowframe\Trend\Trend;
 
 class ExternalmediaChart extends ChartWidget
 {

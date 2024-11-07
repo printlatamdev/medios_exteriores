@@ -40,7 +40,7 @@ class AdminPanelProvider extends PanelProvider
                 FilamentEditProfilePlugin::make()
                     ->setIcon('ri-profile-fill')
                     ->setNavigationGroup('Manejo de usuarios')
-                    ->shouldShowAvatarForm(),    
+                    ->shouldShowAvatarForm(),
             ])
             ->registrationRouteSlug('register')
             ->passwordResetRoutePrefix('password-reset')
@@ -54,7 +54,7 @@ class AdminPanelProvider extends PanelProvider
                 //Widgets\AccountWidget::class,
                 //Widgets\FilamentInfoWidget::class,
                 ExternalmediaStatsOverview::class,
-                ExternalmediaChart::class
+                //ExternalmediaChart::class,
             ])
             ->spa()
             ->middleware([

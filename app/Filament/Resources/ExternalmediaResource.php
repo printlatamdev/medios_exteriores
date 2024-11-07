@@ -108,8 +108,8 @@ class ExternalmediaResource extends Resource
                 IconColumn::make('status')
                     ->boolean()
                     ->label('Disponibilidad')
-                    ->tooltip(fn (Model $record) => $record->status ? 'Medio vendido' : 'Disponible' )
-                    ->falseIcon('far-circle-check')                    
+                    ->tooltip(fn (Model $record) => $record->status ? 'Medio vendido' : 'Disponible')
+                    ->falseIcon('far-circle-check')
                     ->trueIcon('far-circle-xmark')
                     ->trueColor('warning')
                     ->falseColor('success'),

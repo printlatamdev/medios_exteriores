@@ -5,10 +5,6 @@ namespace App\Imports;
 use App\Models\Externalmedia;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithBatchInserts;
-use Maatwebsite\Excel\Concerns\WithChunkReading;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithStartRow;
 
 class MediaImport implements ToModel
 {
@@ -17,7 +13,7 @@ class MediaImport implements ToModel
      */
     public function model(array $row)
     {
-       return new Externalmedia([
+        return new Externalmedia([
             'code' => $row[0],
             'status' => $row[1],
             'mediatype_id' => $row[2],

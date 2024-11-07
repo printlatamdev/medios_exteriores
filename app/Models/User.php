@@ -15,9 +15,9 @@ class User extends Authenticatable implements HasAvatar
 {
     use HasApiTokens;
     use HasFactory;
-    use Notifiable;
-    use HasRoles;
     use HasPanelShield;
+    use HasRoles;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -50,7 +50,6 @@ class User extends Authenticatable implements HasAvatar
         'email_verified_at' => 'datetime',
     ];
 
-    
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
