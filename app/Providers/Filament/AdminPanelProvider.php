@@ -54,7 +54,7 @@ class AdminPanelProvider extends PanelProvider
                 //Widgets\AccountWidget::class,
                 //Widgets\FilamentInfoWidget::class,
                 ExternalmediaStatsOverview::class,
-                ExternalmediaChart::class,
+                //ExternalmediaChart::class,
             ])
             ->spa()
             ->middleware([

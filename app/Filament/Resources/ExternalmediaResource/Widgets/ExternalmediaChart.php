@@ -22,6 +22,7 @@ class ExternalmediaChart extends ChartWidget
             )
             ->perMonth()
             ->count();
+
         return [
             'datasets' => [
                 [

@@ -18,8 +18,6 @@ class Externalmedia extends Model
         'location' => 'json',
     ];
 
-    
-
     public function mediatype()
     {
         return $this->belongsTo(Mediatype::class);
