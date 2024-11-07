@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('expiration_date_rental')->nullable();
             $table->date('payment_date_rental')->nullable();
             $table->decimal('total_rental', 11, 2)->nullable();
-            
+
             $table->date('tarp_date_change')->nullable();
             $table->decimal('total_tarp', 11, 2)->nullable();
             $table->timestamps();

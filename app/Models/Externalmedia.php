@@ -32,4 +32,9 @@ class Externalmedia extends Model
     {
         return $this->belongsToMany(Budget::class, 'budget_externalmedia');
     }
+
+    public function sales()
+    {
+        return $this->belongsToMany(Sale::class, 'externalmedia_sale');
+    }
 }
