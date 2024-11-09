@@ -34,6 +34,7 @@ class SaleResource extends Resource
                     ->label('Medio externo')
                     ->relationship('externalmedias', 'code')
                     ->options(Externalmedia::pluck('code', 'id'))
+                    ->required()
                     ->searchable(),
                 MoneyInput::make('total')->label('Total de gasto')->disabled(),
                 Section::make('Arrendamiento')->schema([

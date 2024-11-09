@@ -46,7 +46,12 @@ class ExternalmediaResource extends Resource
                         ->options(Mediatype::all()->pluck('name', 'id'))
                         ->searchable()
                         ->required(),
-                    Toggle::make('status')->label('Disponibilidad')->onColor('success')->offColor('danger')->inline(false),
+                    Toggle::make('status')
+                        ->label('Disponibilidad')
+                        ->required()
+                        ->onColor('success')
+                        ->offColor('danger')
+                        ->inline(false),
                 ])->columns(3),
                 Section::make('Multimedia')->schema([
                     FileUpload::make('gallery')
@@ -61,17 +66,19 @@ class ExternalmediaResource extends Resource
                     Select::make('department_id')
                         ->label('Departamento')
                         ->reactive()
+                        ->required()
                         ->options(Department::pluck('name', 'id'))
                         ->columnSpan(1),
                     Select::make('municipality_id')
                         ->label('Municipio')
                         ->reactive()
-                        ->options(fn (Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
+                        ->required()
+                        ->options(fn(Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->columnSpan(1),
                     Select::make('district_id')
                         ->label('Distrito')
-                        ->options(fn (Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
+                        ->options(fn(Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->required()
                         ->columnSpan(1),
@@ -108,7 +115,7 @@ class ExternalmediaResource extends Resource
                 IconColumn::make('status')
                     ->boolean()
                     ->label('Disponibilidad')
-                    ->tooltip(fn (Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
+                    ->tooltip(fn(Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
                     ->falseIcon('far-circle-xmark')
                     ->trueIcon('far-circle-check')
                     ->trueColor('success')
@@ -138,9 +145,7 @@ class ExternalmediaResource extends Resource
                     Tables\Actions\DeleteAction::make(),
                 ])->tooltip('Acciones'),
             ])
-            ->bulkActions([
-
-            ]);
+            ->bulkActions([]);
     }
 
     public static function getRelations(): array

@@ -30,14 +30,15 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->label('Nombre completo'),
-                TextInput::make('email')->label('Correo electrónico'),
+                TextInput::make('name')->label('Nombre completo')->required(),
+                TextInput::make('email')->label('Correo electrónico')->required(),
                 TextInput::make('password')->label('Contraseña')
                     ->password()
                     ->revealable()
+                    ->required()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn (?string $state): bool => filled($state)),
-                Select::make('roles')->multiple()->relationship('roles', 'name')->options(Role::pluck('name', 'id')),
+                Select::make('roles')->multiple()->relationship('roles', 'name')->options(Role::pluck('name', 'id'))->required(),
             ]);
     }
 

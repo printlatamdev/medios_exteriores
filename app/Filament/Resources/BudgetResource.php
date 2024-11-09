@@ -36,7 +36,8 @@ class BudgetResource extends Resource
                     ->label('Medio externo')
                     ->relationship('externalmedias', 'code')
                     ->options(Externalmedia::pluck('code', 'id'))
-                    ->searchable(),
+                    ->searchable()
+                    ->required(),
                 MoneyInput::make('total_payment')->label('Total de gasto')->disabled(),
                 Section::make('Fianza')->schema([
                     DatePicker::make('expiration_date_bail')->label('Fecha de vencimiento'),
