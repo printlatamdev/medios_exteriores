@@ -57,9 +57,9 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
     }
 
-    /*
+    
     public function canAccessPanel(Panel $panel): bool
     {
         return str_ends_with($this->email, '@printlatam.com');
-    }*/
+    }
 }
