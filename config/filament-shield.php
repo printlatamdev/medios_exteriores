@@ -25,8 +25,13 @@ return [
     ],
 
     'panel_user' => [
-        'enabled' => true,
+        'enabled' => false,
         'name' => 'panel_user',
+    ],
+
+    'ventas' => [
+        'enabled' => true,
+        'name' => 'panel_ventas',
     ],
 
     'permission_prefixes' => [

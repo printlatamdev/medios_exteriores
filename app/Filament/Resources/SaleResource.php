@@ -25,6 +25,8 @@ class SaleResource extends Resource
     protected static ?string $pluralModelLabel = 'Ventas';
 
     protected static ?string $navigationIcon = 'fas-tags';
+    
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {

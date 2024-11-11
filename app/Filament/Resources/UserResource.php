@@ -52,7 +52,7 @@ class UserResource extends Resource
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'super_admin' => 'success',
-                        'panel_user' => 'info',
+                        'panel_ventas' => 'info',
                     }),
             ])
             ->filters([
