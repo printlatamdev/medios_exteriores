@@ -26,7 +26,7 @@ class SaleResource extends Resource
 
     protected static ?string $navigationIcon = 'fas-tags';
 
-    protected static bool $shouldRegisterNavigation = false;
+    //protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
