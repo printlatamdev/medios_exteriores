@@ -17,6 +17,6 @@ class Sale extends Model
 
     public function externalmedias()
     {
-        return $this->belongsToMany(Externalmedia::class, 'externalmedia_sale');
+        return $this->belongsToMany(Externalmedia::class, 'externalmedia_sale')->withPivot('quote', 'purchaseorder');
     }
 }

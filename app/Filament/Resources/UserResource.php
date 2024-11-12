@@ -9,6 +9,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
@@ -46,13 +47,14 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('avatar_url')->circular()->label('Foto de perfil'),
                 TextColumn::make('name')->label('Nombre'),
                 TextColumn::make('email')->label('Correo eletrónico'),
                 TextColumn::make('roles.name')->label('Roles')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'super_admin' => 'success',
-                        'panel_ventas' => 'info',
+                        'ventas' => 'info',
                     }),
             ])
             ->filters([

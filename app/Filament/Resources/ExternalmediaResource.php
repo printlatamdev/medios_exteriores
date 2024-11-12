@@ -73,12 +73,12 @@ class ExternalmediaResource extends Resource
                         ->label('Municipio')
                         ->reactive()
                         //->required()
-                        ->options(fn (Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
+                        ->options(fn(Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->columnSpan(1),
                     Select::make('district_id')
                         ->label('Distrito')
-                        ->options(fn (Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
+                        ->options(fn(Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->required()
                         ->columnSpan(1),
@@ -115,7 +115,7 @@ class ExternalmediaResource extends Resource
                 IconColumn::make('status')
                     ->boolean()
                     ->label('Disponibilidad')
-                    ->tooltip(fn (Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
+                    ->tooltip(fn(Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
                     ->falseIcon('far-circle-xmark')
                     ->trueIcon('far-circle-check')
                     ->trueColor('success')
@@ -129,15 +129,15 @@ class ExternalmediaResource extends Resource
                 ]),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('mediatype')
-                    ->label('Tipo de medio')
-                    ->relationship('mediatype', 'name')
-                    ->options(Mediatype::pluck('name', 'id')),
                 Tables\Filters\SelectFilter::make('district')
                     ->label('Distrito')
                     ->searchable()
                     ->relationship('district', 'name')
                     ->options(District::pluck('name', 'id')),
+                Tables\Filters\SelectFilter::make('mediatype')
+                    ->label('Tipo de medio')
+                    ->relationship('mediatype', 'name')
+                    ->options(Mediatype::pluck('name', 'id')),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
