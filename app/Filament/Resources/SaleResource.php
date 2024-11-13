@@ -56,7 +56,7 @@ class SaleResource extends Resource
                         ->label('Orden de compra')
                         ->preserveFilenames(),
                 ])->columns(2),
-               /** Section::make('Cambio de lona')->schema([
+            /** Section::make('Cambio de lona')->schema([
                     DatePicker::make('tarp_date_change')->label('Fecha cambio de lona'),
                     MoneyInput::make('total_tarp')->label('Total'),
                 ])->columns(2), */

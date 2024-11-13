@@ -40,19 +40,32 @@ class ExternalmediaResource extends Resource
         return $form
             ->schema([
                 Section::make()->schema([
-                    TextInput::make('code')->label('Código')->required(),
+                    TextInput::make('code')->label('Código')
+                        ->required()
+                        ->columnSpan(2),
                     Select::make('mediatype_id')
                         ->label('Tipo de medio')
                         ->options(Mediatype::all()->pluck('name', 'id'))
                         ->searchable()
-                        ->required(),
+                        ->required()
+                        ->columnSpan(2),
                     Toggle::make('status')
                         ->label('Disponibilidad')
                         ->required()
                         ->onColor('success')
                         ->offColor('danger')
-                        ->inline(false),
-                ])->columns(3),
+                        ->inline(false)
+                        ->columnSpan(1),
+                    TextInput::make('traffic_flow')->label('Flujo vehícular')->columnSpan(2),
+                    Select::make('lighting')
+                        ->label('Iluminación')
+                        ->options([
+                            'Externa' => 'Externa',
+                            'Incluye' => 'Incluye',
+                            'N/A' => 'N/A',
+                            'S/I' => 'S/I',
+                        ])->columnSpan(2),
+                ])->columns(5),
                 Section::make('Multimedia')->schema([
                     FileUpload::make('gallery')
                         ->multiple()

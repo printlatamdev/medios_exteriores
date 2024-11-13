@@ -9,17 +9,17 @@ class Externalmedia extends Model
     protected $table = 'externalmedia';
 
     protected $fillable = [
-        'code', 
-        'status', 
-        'mediatype_id', 
-        'district_id', 
-        'address', 
-        'location', 
-        'gallery', 
-        'width', 
+        'code',
+        'status',
+        'mediatype_id',
+        'district_id',
+        'address',
+        'location',
+        'gallery',
+        'width',
         'height',
         'traffic_flow',
-        'lighting'
+        'lighting',
     ];
 
     protected $casts = [
