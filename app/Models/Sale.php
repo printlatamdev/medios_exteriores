@@ -21,4 +21,8 @@ class Sale extends Model
     {
         return $this->belongsToMany(Externalmedia::class, 'externalmedia_sale')->withPivot('quote', 'purchaseorder');
     }
+
+    public function payment(){
+        return $this->hasOne(Payment::class);
+    }
 }

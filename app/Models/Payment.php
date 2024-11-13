@@ -8,9 +8,13 @@ class Payment extends Model
 {
     protected $fillable = [
         'payment_date', 
-        'contract_id', 
+        'sale_id', 
         'payment_term', 
         'scheduled_payments',
         'status',
     ];
+
+    public function sale(){
+        return $this->belongsTo(Sale::class);
+    }
 }
