@@ -9,6 +9,7 @@ use App\Models\Externalmedia;
 use App\Models\Mediatype;
 use App\Models\Municipality;
 use ArberMustafa\FilamentLocationPickrField\Forms\Components\LocationPickr;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -24,6 +25,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 
 class ExternalmediaResource extends Resource
 {
@@ -158,7 +160,22 @@ class ExternalmediaResource extends Resource
                     Tables\Actions\DeleteAction::make(),
                 ])->tooltip('Acciones'),
             ])
-            ->bulkActions([]);
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    //Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\Action::make('pdf') 
+                    ->label('Exportar PDF')
+                    ->color('success')
+                    ->icon('fas-file-pdf')
+                    ->action(function (Model $records) {
+                        return response()->streamDownload(function () use ($records) {
+                            echo Pdf::loadHtml(
+                                Blade::render('externalmedia', ['records' => $records])
+                            )->stream();
+                        }, 'medios-externos.pdf');
+                    }), 
+                ]),
+            ]);
     }
 
     public static function getRelations(): array

@@ -9,6 +9,7 @@
         "althinect/filament-spatie-roles-permissions": "^2.2",
         "andreiio/blade-remix-icon": "^3.5",
         "arbermustafa/filament-locationpickr-field": "2.0.0",
+        "barryvdh/laravel-dompdf": "^3.0",
         "bezhansalleh/filament-shield": "^3.3",
         "eightynine/filament-excel-import": "^3.1",
         "filament/filament": "3.2.57",
