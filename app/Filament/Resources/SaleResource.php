@@ -39,12 +39,13 @@ class SaleResource extends Resource
                     ->options(Externalmedia::pluck('code', 'id'))
                     ->required()
                     ->searchable(),
-                MoneyInput::make('total')->label('Total de gasto')->disabled(),
+                MoneyInput::make('total')->label('Total de pago')->disabled(),
                 Section::make('Arrendamiento')->schema([
-                    DatePicker::make('expiration_date_rental')->label('Fecha de vencimiento'),
+                    DatePicker::make('begin_date_rental')->label('Fecha de inicio'),
+                    DatePicker::make('end_date_rental')->label('Fecha de finalización'),
                     DatePicker::make('payment_date_rental')->label('Fecha de pago'),
-                    MoneyInput::make('total_rental')->label('Total'),
-                ])->columns(3),
+                    MoneyInput::make('total_rental')->label('Total mensual'),
+                ])->columns(4),
                 Section::make('Archivos adjuntos')->schema([
                     FileUpload::make('quote')
                         ->directory('files')
