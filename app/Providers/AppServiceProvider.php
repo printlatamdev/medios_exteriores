@@ -30,4 +30,3 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(\App\Models\Role::class, \App\Policies\RolePolicy::class);
     }
 }
-

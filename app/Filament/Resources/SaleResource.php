@@ -6,6 +6,7 @@ use App\Filament\Resources\SaleResource\Pages;
 use App\Models\Externalmedia;
 use App\Models\Sale;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -20,11 +21,11 @@ class SaleResource extends Resource
 {
     protected static ?string $model = Sale::class;
 
-    protected static ?string $modelLabel = 'Venta';
+    protected static ?string $modelLabel = 'Contrato';
 
-    protected static ?string $pluralModelLabel = 'Ventas';
+    protected static ?string $pluralModelLabel = 'Contratos';
 
-    protected static ?string $navigationIcon = 'fas-tags';
+    protected static ?string $navigationIcon = 'fas-file-contract';
 
     //protected static bool $shouldRegisterNavigation = false;
 
@@ -44,10 +45,20 @@ class SaleResource extends Resource
                     DatePicker::make('payment_date_rental')->label('Fecha de pago'),
                     MoneyInput::make('total_rental')->label('Total'),
                 ])->columns(3),
-                Section::make('Arrendamiento')->schema([
+                Section::make('Archivos adjuntos')->schema([
+                    FileUpload::make('quote')
+                        ->directory('files')
+                        ->label('Cotización')
+                        ->preserveFilenames(),
+                    FileUpload::make('purchaseorder')
+                        ->directory('files')
+                        ->label('Orden de compra')
+                        ->preserveFilenames(),
+                ])->columns(2),
+               /** Section::make('Cambio de lona')->schema([
                     DatePicker::make('tarp_date_change')->label('Fecha cambio de lona'),
                     MoneyInput::make('total_tarp')->label('Total'),
-                ])->columns(2),
+                ])->columns(2), */
             ]);
     }
 
@@ -61,10 +72,10 @@ class SaleResource extends Resource
                     TextColumn::make('payment_date_rental')->label('Fecha de pago arrendamiento'),
                     TextColumn::make('total_rental')->label('Total de arrendamiento'),
                 ]),
-                ColumnGroup::make('Cambio de lona', [
+                /**ColumnGroup::make('Cambio de lona', [
                     TextColumn::make('tarp_date_change')->label('Fecha de cambio'),
                     TextColumn::make('total_tarp')->label('Total'),
-                ]),
+                ]), */
             ])
             ->filters([
                 //
