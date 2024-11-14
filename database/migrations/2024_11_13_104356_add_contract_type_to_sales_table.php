@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::table('sales', function (Blueprint $table) {
             $table->date('begin_date_rental')->nullable();
             $table->string('contract_type')->nullable();
+            $table->string('quote')->nullable();
+            $table->string('purchaseorder')->nullable();
         });
     }
 

@@ -10,6 +10,7 @@ use App\Models\Mediatype;
 use App\Models\Municipality;
 use ArberMustafa\FilamentLocationPickrField\Forms\Components\LocationPickr;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -155,6 +156,11 @@ class ExternalmediaResource extends Resource
                     ->options(Mediatype::pluck('name', 'id')),
             ])
             ->actions([
+                Action::make('contrato')
+                ->icon('fas-file-contract')
+                ->color('info')
+                ->tooltip('Exportar contrato')
+                ->iconButton(),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),

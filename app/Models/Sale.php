@@ -15,11 +15,13 @@ class Sale extends Model
         'tarp_date_change',
         'total_tarp',
         'total',
+        'quote',
+        'purchaseorder'
     ];
 
     public function externalmedias()
     {
-        return $this->belongsToMany(Externalmedia::class, 'externalmedia_sale')->withPivot('quote', 'purchaseorder');
+        return $this->belongsToMany(Externalmedia::class, 'externalmedia_sale');
     }
 
     public function payment()

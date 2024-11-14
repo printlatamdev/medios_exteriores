@@ -3,11 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Medios externos</title>
+        <title>Contrato</title>
     </head>
     <body>
         <p>
-            {{ $records }}
+            Datos de contrato
         </p>
     </body>
 </html>

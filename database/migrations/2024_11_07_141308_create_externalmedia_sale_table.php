@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('externalmedia_id')->constrained();
             $table->foreignId('sale_id')->constrained();
-            $table->string('quote')->nullable();
-            $table->string('purchaseorder')->nullable();
             $table->timestamps();
         });
     }
