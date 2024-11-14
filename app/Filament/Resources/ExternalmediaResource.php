@@ -163,17 +163,17 @@ class ExternalmediaResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     //Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\Action::make('pdf') 
-                    ->label('Exportar PDF')
-                    ->color('success')
-                    ->icon('fas-file-pdf')
-                    ->action(function (Model $records) {
-                        return response()->streamDownload(function () use ($records) {
-                            echo Pdf::loadHtml(
-                                Blade::render('externalmedia', ['records' => $records])
-                            )->stream();
-                        }, 'medios-externos.pdf');
-                    }), 
+                    Tables\Actions\Action::make('pdf')
+                        ->label('Exportar PDF')
+                        ->color('success')
+                        ->icon('fas-file-pdf')
+                        ->action(function (Model $records) {
+                            return response()->streamDownload(function () use ($records) {
+                                echo Pdf::loadHtml(
+                                    Blade::render('externalmedia', ['records' => $records])
+                                )->stream();
+                            }, 'medios-externos.pdf');
+                        }),
                 ]),
             ]);
     }

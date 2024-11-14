@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(Schema::hasTable('payments')) return;
+        if (Schema::hasTable('payments')) {
+            return;
+        }
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->date('payment_date')->nullable();
             $table->foreignId('sale_id')->constrained();
-            $table->string('payment_term')->nullable(); 
-            $table->string('scheduled_payments')->nullable(); 
+            $table->string('payment_term')->nullable();
+            $table->string('scheduled_payments')->nullable();
             $table->string('status')->default('Pendiente de facturar'); //Pendiente de facturar, pendiente de pago, cancelado
             $table->timestamps();
         });

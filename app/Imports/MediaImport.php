@@ -23,6 +23,8 @@ class MediaImport implements ToModel
             'gallery' => $row[6],
             'width' => $row[7],
             'height' => $row[8],
+            'traffic_flow' => $row[9],
+            'lighting' => $row[10],
         ]);
     }
     /**

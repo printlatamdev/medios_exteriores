@@ -3,15 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PaymentResource\Pages;
-use App\Filament\Resources\PaymentResource\RelationManagers;
 use App\Models\Payment;
-use Filament\Forms;
+use App\Models\Sale;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PaymentResource extends Resource
 {
@@ -27,7 +25,11 @@ class PaymentResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Select::make('sale_id')
+                    ->label('Contrato')
+                    ->options(Sale::pluck('name', 'id'))
+                    ->required()
+                    ->searchable(),
             ]);
     }
 
