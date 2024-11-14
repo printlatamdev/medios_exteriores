@@ -8,7 +8,6 @@ use App\Models\District;
 use App\Models\Externalmedia;
 use App\Models\Mediatype;
 use App\Models\Municipality;
-use ArberMustafa\FilamentLocationPickrField\Forms\Components\LocationPickr;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\FileUpload;
@@ -20,6 +19,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\ActionSize;
 use Filament\Tables;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\IconColumn;
@@ -27,6 +27,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Collection;
+
 
 class ExternalmediaResource extends Resource
 {
@@ -89,12 +91,12 @@ class ExternalmediaResource extends Resource
                         ->label('Municipio')
                         ->reactive()
                         //->required()
-                        ->options(fn (Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
+                        ->options(fn(Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->columnSpan(1),
                     Select::make('district_id')
                         ->label('Distrito')
-                        ->options(fn (Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
+                        ->options(fn(Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->required()
                         ->columnSpan(1),
@@ -131,7 +133,7 @@ class ExternalmediaResource extends Resource
                 IconColumn::make('status')
                     ->boolean()
                     ->label('Disponibilidad')
-                    ->tooltip(fn (Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
+                    ->tooltip(fn(Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
                     ->falseIcon('far-circle-xmark')
                     ->trueIcon('far-circle-check')
                     ->trueColor('success')
@@ -157,10 +159,13 @@ class ExternalmediaResource extends Resource
             ])
             ->actions([
                 Action::make('contrato')
-                ->icon('fas-file-contract')
-                ->color('info')
-                ->tooltip('Exportar contrato')
-                ->iconButton(),
+                    ->icon('fas-file-contract')
+                    ->color('info')
+                    ->size(ActionSize::Large)
+                    ->tooltip('Exportar contrato')
+                    //->url(fn (Sale $sale): string => route('contract.pdf', $sale))
+                    //->openUrlInNewTab()
+                    ->iconButton(),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
@@ -173,13 +178,14 @@ class ExternalmediaResource extends Resource
                         ->label('Exportar PDF')
                         ->color('success')
                         ->icon('fas-file-pdf')
-                        ->action(function (Model $records) {
+                        ->action(function (Collection $records) {
                             return response()->streamDownload(function () use ($records) {
-                                echo Pdf::loadHtml(
+                                echo Pdf::loadHTML(
                                     Blade::render('externalmedia', ['records' => $records])
                                 )->stream();
-                            }, 'medios-externos.pdf');
-                        }),
+                            }, 'externalmedia.pdf');
+                        })
+                        ->openUrlInNewTab()
                 ]),
             ]);
     }

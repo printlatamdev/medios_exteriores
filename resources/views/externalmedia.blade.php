@@ -7,7 +7,7 @@
     </head>
     <body>
         <p>
-            {{ $records }}
+           Lorem {{ $records }}
         </p>
     </body>
 </html>
