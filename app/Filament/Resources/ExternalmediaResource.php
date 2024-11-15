@@ -174,10 +174,12 @@ class ExternalmediaResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     //Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\Action::make('pdf')
+                    Tables\Actions\BulkAction::make('Export')
                         ->label('Exportar PDF')
                         ->color('success')
                         ->icon('fas-file-pdf')
+                        ->openUrlInNewTab()
+                        ->deselectRecordsAfterCompletion()
                         ->action(function (Collection $records) {
                             return response()->streamDownload(function () use ($records) {
                                 echo Pdf::loadHTML(
@@ -185,7 +187,6 @@ class ExternalmediaResource extends Resource
                                 )->stream();
                             }, 'externalmedia.pdf');
                         })
-                        ->openUrlInNewTab()
                 ]),
             ]);
     }
