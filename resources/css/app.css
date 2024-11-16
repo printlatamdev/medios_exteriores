@@ -6,12 +6,11 @@
 [x-cloak] {
     display: none;
 }
-
-.montserrat {
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
+@font-face {
+    font-family: 'Montserrat';
     font-style: normal;
+    font-weight: 400;
+    src: url('montserrat/Montserrat-Regular.ttf') format('truetype');
 }
 .customize-table {
     border-radius: 7px;

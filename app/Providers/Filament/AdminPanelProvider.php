@@ -32,9 +32,9 @@ class AdminPanelProvider extends PanelProvider
             ->path('')
             ->login()
             ->brandName('Color Digital')
-            ->brandLogo(asset('assets/images/logo.jpg'))
+            ->brandLogo(asset('assets/images/media/1.png'))
             ->favicon(asset('assets/images/color.ico'))
-            ->brandLogoHeight('3rem')
+            ->brandLogoHeight('4rem')
             ->colors(['primary' => Color::Green])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),

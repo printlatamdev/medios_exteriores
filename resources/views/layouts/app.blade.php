@@ -10,6 +10,9 @@
         <title>{{ config('app.name') }}</title>
  
         <style>
+            body{
+                font-family: "Montserrat", sans-serif;
+            }
             [x-cloak] {
                 display: none !important;
             }
@@ -19,7 +22,7 @@
         @vite('resources/css/app.css')
     </head>
  
-    <body class="antialiased">
+    <body class="">
         {{ $slot }}
  
         @filamentScripts
