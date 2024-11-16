@@ -16,7 +16,7 @@ class Sale extends Model
         'total_tarp',
         'total',
         'quote',
-        'purchaseorder'
+        'purchaseorder',
     ];
 
     public function externalmedias()

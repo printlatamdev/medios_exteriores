@@ -10,6 +10,7 @@
             margin: 0cm 0cm;
             padding: 0cm 0cm;
         }
+
         body {
             font-family: "Montserrat", sans-serif;
             margin-top: 0cm;
@@ -47,7 +48,7 @@
 
         .mediaImage {
             width: 100%;
-            height: 75%;
+            height: 70%;
         }
 
         .footerImage {
@@ -57,34 +58,42 @@
             padding: 0px;
             margin-left: 0px !important;
             width: 100%;
-            height: 25%;
+            height: 30%;
         }
 
         .infoFooter {
             color: white;
-            margin-bottom: 1px;
         }
 
         .addressLogo {
             width: 30px;
-            height: 30px;
-            margin-top: 3px !important;
+            height: 25px;
+            margin-top: 15px !important;
         }
 
         .listContainer {
             color: white;
         }
-        .logoCDFooter{
+
+        .logoCDFooter {
             width: 75%;
             height: 100px;
             display: block;
             margin: 0 auto;
         }
+
         ul li {
             list-style: none;
         }
+        .list{
+            margin-left: 20px;
+        }
         .mainTable {
             width: 100%;
+        }
+
+        .fontsemibold {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -106,34 +115,39 @@
                 <img src="{{ public_path('storage/' . $item->gallery[0]) }}" alt="logo" class="mediaImage">
                 <div class="footerImage">
                     <div class="infoFooter">
-                        <h4>
+                        <h1 style="margin: 0px; margin-left: 12px; margin-top: 12px">{{ $item->mediatype['name'] }}
+                            {{ $item->code }}</h1>
+                        <p style="margin: 0px">
                             <span>
                                 <img src="{{ public_path('assets/images/media/7.png') }}" alt="logo"
                                     class="addressLogo"></span>
                             {{ $item->address }}
-                        </h4>
+                        </p>
                     </div>
                     <div class="listContainer">
-                        <table class="mainTable">
+                        <table class="mainTable" style="margin: 0px">
                             <tr>
                                 <td style="width: 80%">
-                                    <ul>
-                                        <li>-Medida de la Valla: {{ $item->width }} X {{ $item->height }}</li>
-                                        <li>-Flujo Vehícular: {{ $item->traffic_flow }}</li>
-                                        <li>-Iluminación {{ $item->lighting }}</li>
+                                    <ul class="list">
+                                        <li><span class="fontsemibold">-Distrito:</span> {{ $item->district['name'] }}
+                                        </li>
+                                        <li><span class="fontsemibold">-Medida de la Valla:</span> {{ $item->width }} X
+                                            {{ $item->height }}</li>
+                                        <li><span class="fontsemibold">-Flujo Vehícular:</span>
+                                            {{ $item->traffic_flow }}</li>
+                                        <li><span class="fontsemibold">-Iluminación:</span> {{ $item->lighting }}</li>
                                     </ul>
                                 </td>
                                 <td style="width: 20%">
-                                    <img src="{{ public_path('assets/images/media/1.png') }}" alt="logo" class="logoCDFooter">
+                                    <img src="{{ public_path('assets/images/media/1.png') }}" alt="logo"
+                                        class="logoCDFooter">
                                 </td>
                             </tr>
                         </table>
                     </div>
                 </div>
-                {{ $item }}
             </div>
         @endforeach
     </div>
 </body>
-
 </html>

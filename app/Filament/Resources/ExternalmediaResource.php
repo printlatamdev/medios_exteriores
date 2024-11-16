@@ -9,7 +9,6 @@ use App\Models\Externalmedia;
 use App\Models\Mediatype;
 use App\Models\Municipality;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -21,14 +20,14 @@ use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\ActionSize;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Collection;
-
+use Illuminate\Support\Facades\Blade;
 
 class ExternalmediaResource extends Resource
 {
@@ -91,12 +90,12 @@ class ExternalmediaResource extends Resource
                         ->label('Municipio')
                         ->reactive()
                         //->required()
-                        ->options(fn(Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
+                        ->options(fn (Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->columnSpan(1),
                     Select::make('district_id')
                         ->label('Distrito')
-                        ->options(fn(Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
+                        ->options(fn (Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->required()
                         ->columnSpan(1),
@@ -133,7 +132,7 @@ class ExternalmediaResource extends Resource
                 IconColumn::make('status')
                     ->boolean()
                     ->label('Disponibilidad')
-                    ->tooltip(fn(Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
+                    ->tooltip(fn (Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
                     ->falseIcon('far-circle-xmark')
                     ->trueIcon('far-circle-check')
                     ->trueColor('success')
@@ -175,7 +174,7 @@ class ExternalmediaResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     //Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\BulkAction::make('Export')
-                        ->label('Exportar PDF')
+                        ->label('Generar disponibilidad')
                         ->color('success')
                         ->icon('fas-file-pdf')
                         ->openUrlInNewTab()
@@ -186,7 +185,7 @@ class ExternalmediaResource extends Resource
                                     Blade::render('externalmedia', ['records' => $records])
                                 )->stream();
                             }, 'externalmedia.pdf');
-                        })
+                        }),
                 ]),
             ]);
     }

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/contract/{sale}', [ReportController::class, 'contractPDF'])->name('contract.pdf');
 
-
 Route::get('/external-media/{externalmedia}', [ReportController::class, 'externalmediaPDF'])->name('externalmedia.pdf');
 
 /**
