@@ -22,8 +22,7 @@ return new class extends Migration
             $table->json('location')->nullable();
             $table->string('traffic_flow')->nullable();
             $table->string('lighting')->nullable();
-            $table->string('total_rental')->nullable();
-            $table->integer('months')->nullable();
+            $table->float('rental', 11, 2)->nullable();
             $table->string('production')->nullable();
             $table->foreignId('mediatype_id')->constrained();
             $table->foreignId('district_id')->constrained();

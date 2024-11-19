@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Externalmedia;
 use App\Models\User;
+use App\Models\Externalmedia;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ExternalmediaPolicy

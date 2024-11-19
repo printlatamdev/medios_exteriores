@@ -52,7 +52,7 @@ class ExternalmediaResource extends Resource
                         ->options(Mediatype::all()->pluck('name', 'id'))
                         ->searchable()
                         ->required()
-                        ->columnSpan(2),
+                        ->columnSpan(1),
                     Toggle::make('status')
                         ->label('Disponibilidad')
                         ->required()
@@ -60,7 +60,7 @@ class ExternalmediaResource extends Resource
                         ->offColor('danger')
                         ->inline(false)
                         ->columnSpan(1),
-                    TextInput::make('traffic_flow')->label('Flujo vehícular')->columnSpan(2),
+                    TextInput::make('traffic_flow')->label('Flujo vehícular')->columnSpan(1),
                     Select::make('lighting')
                         ->label('Iluminación')
                         ->options([
@@ -68,8 +68,12 @@ class ExternalmediaResource extends Resource
                             'Incluye' => 'Incluye',
                             'N/A' => 'N/A',
                             'S/I' => 'S/I',
-                        ])->columnSpan(2),
-                ])->columns(5),
+                        ])->columnSpan(1),
+                        TextInput::make('rental')->label('Arrendamiento')
+                            ->columnSpan(1),
+                        TextInput::make('production')->label('Producción')
+                            ->columnSpan(1),
+                ])->columns(4),
                 Section::make('Multimedia')->schema([
                     FileUpload::make('gallery')
                         ->multiple()

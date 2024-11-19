@@ -3,12 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SaleResource\Pages;
+use App\Models\Customer;
 use App\Models\Externalmedia;
 use App\Models\Sale;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -39,11 +42,25 @@ class SaleResource extends Resource
                     ->options(Externalmedia::pluck('code', 'id'))
                     ->required()
                     ->searchable(),
+                Select::make('customer_id')
+                    ->label('Cliente')
+                    ->relationship('customer', 'name')
+                    ->options(Customer::pluck('name', 'id'))
+                    ->required()
+                    ->searchable()
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->label('Nombre de cliente')
+                            ->required(),
+                        Textarea::make('description')
+                            ->rows(3)
+                            ->cols(3),
+                    ]),
                 MoneyInput::make('total')->label('Total de pago')->disabled(),
                 Section::make('Arrendamiento')->schema([
                     DatePicker::make('begin_date_rental')->label('Fecha de inicio'),
                     DatePicker::make('end_date_rental')->label('Fecha de finalización'),
-                    DatePicker::make('payment_date_rental')->label('Fecha de pago'),
+                    TextInput::make('months')->label('Cantidad de meses'),
                     MoneyInput::make('total_rental')->label('Total mensual'),
                 ])->columns(4),
                 Section::make('Archivos adjuntos')->schema([

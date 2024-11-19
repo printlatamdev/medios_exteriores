@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('total', 11, 2)->nullable();
             $table->date('begin_date_rental')->nullable();
             $table->string('contract_type')->nullable();
+            $table->integer('months')->nullable();
             $table->string('quote')->nullable();
             $table->string('purchaseorder')->nullable();
             $table->timestamps();
