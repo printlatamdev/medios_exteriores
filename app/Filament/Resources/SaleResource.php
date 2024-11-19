@@ -36,27 +36,30 @@ class SaleResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('externalmedia_id')
-                    ->label('Medio externo')
-                    ->relationship('externalmedias', 'code')
-                    ->options(Externalmedia::pluck('code', 'id'))
-                    ->required()
-                    ->searchable(),
-                Select::make('customer_id')
-                    ->label('Cliente')
-                    ->relationship('customer', 'name')
-                    ->options(Customer::pluck('name', 'id'))
-                    ->required()
-                    ->searchable()
-                    ->createOptionForm([
-                        TextInput::make('name')
-                            ->label('Nombre de cliente')
-                            ->required(),
-                        Textarea::make('description')
-                            ->rows(3)
-                            ->cols(3),
-                    ]),
-                MoneyInput::make('total')->label('Total de pago')->disabled(),
+                Section::make('')->schema([
+                    Select::make('externalmedia_id')
+                        ->label('Medio externo')
+                        ->relationship('externalmedias', 'code')
+                        ->options(Externalmedia::pluck('code', 'id'))
+                        ->required()
+                        ->searchable()
+                        ->columnSpan(1),
+                    Select::make('customer_id')
+                        ->label('Cliente')
+                        ->relationship('customer', 'name')
+                        ->options(Customer::pluck('name', 'id'))
+                        ->required()
+                        ->searchable()
+                        ->createOptionForm([
+                            TextInput::make('name')
+                                ->label('Nombre de cliente')
+                                ->required(),
+                            Textarea::make('description')
+                                ->rows(3)
+                                ->cols(3),
+                        ])->columnSpan(1),
+                    MoneyInput::make('total')->label('Total de pago')->disabled()->columnSpan(1),
+                ])->columns(3),
                 Section::make('Arrendamiento')->schema([
                     DatePicker::make('begin_date_rental')->label('Fecha de inicio'),
                     DatePicker::make('end_date_rental')->label('Fecha de finalización'),
@@ -104,9 +107,7 @@ class SaleResource extends Resource
                     Tables\Actions\DeleteAction::make(),
                 ])->tooltip('Acciones'),
             ])
-            ->bulkActions([
-
-            ]);
+            ->bulkActions([]);
     }
 
     public static function getRelations(): array

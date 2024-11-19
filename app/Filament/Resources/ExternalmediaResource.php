@@ -69,10 +69,10 @@ class ExternalmediaResource extends Resource
                             'N/A' => 'N/A',
                             'S/I' => 'S/I',
                         ])->columnSpan(1),
-                        TextInput::make('rental')->label('Arrendamiento')
-                            ->columnSpan(1),
-                        TextInput::make('production')->label('Producción')
-                            ->columnSpan(1),
+                    TextInput::make('rental')->label('Arrendamiento')
+                        ->columnSpan(1),
+                    TextInput::make('production')->label('Producción')
+                        ->columnSpan(1),
                 ])->columns(4),
                 Section::make('Multimedia')->schema([
                     FileUpload::make('gallery')
@@ -142,8 +142,8 @@ class ExternalmediaResource extends Resource
                     ->trueColor('success')
                     ->falseColor('warning'),
                 TextColumn::make('address')->label('Dirección'),
-                TextColumn::make('mediatype.name')->label('Tipo de medio'),
-                TextColumn::make('district.name')->label('Distrito'),
+                TextColumn::make('mediatype.name')->label('Tipo de medio')->searchable(),
+                TextColumn::make('district.name')->label('Distrito')->searchable(),
                 ColumnGroup::make('Medidas', [
                     TextColumn::make('width')->label('Ancho'),
                     TextColumn::make('height')->label('Alto'),

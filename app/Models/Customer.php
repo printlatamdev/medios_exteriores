@@ -12,7 +12,8 @@ class Customer extends Model
         'customer_type',
     ];
 
-    public function sale(){
+    public function sale()
+    {
         return $this->hasMany(Sale::class);
     }
 }
