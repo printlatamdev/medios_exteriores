@@ -11,8 +11,6 @@ class Externalmedia extends Model
     protected $fillable = [
         'code',
         'status',
-        'mediatype_id',
-        'district_id',
         'address',
         'location',
         'gallery',
@@ -20,6 +18,11 @@ class Externalmedia extends Model
         'height',
         'traffic_flow',
         'lighting',
+        'total_rental',
+        'months',
+        'production',
+        'mediatype_id',
+        'district_id',
     ];
 
     protected $casts = [

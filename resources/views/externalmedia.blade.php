@@ -104,11 +104,11 @@
             <img src="{{ public_path('assets/images/media/1.png') }}" alt="logo" class="mainLogo">
         </div>
     </div>
-    <div class="secondPage">
+    <!--<div class="secondPage">
         <div class="divImage">
             lorem
         </div>
-    </div>
+    </div>-->
     <div>
         @foreach ($records as $item)
             <div>

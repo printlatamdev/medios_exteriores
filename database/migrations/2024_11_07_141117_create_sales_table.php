@@ -21,6 +21,10 @@ return new class extends Migration
             $table->decimal('total_tarp', 11, 2)->nullable();
 
             $table->decimal('total', 11, 2)->nullable();
+            $table->date('begin_date_rental')->nullable();
+            $table->string('contract_type')->nullable();
+            $table->string('quote')->nullable();
+            $table->string('purchaseorder')->nullable();
             $table->timestamps();
         });
     }
