@@ -15,6 +15,6 @@ class ReportController extends Controller
 
     public function externalmediaPDF(Externalmedia $externalmedia)
     {
-        return Pdf::loadView('externalmedia', ['record' => $externalmedia])->download('externalmedia.pdf');
+        return Pdf::loadView('externalmedia', ['record' => $externalmedia])->setPaper(['0, 0, 33.87, 19.05'])->download('externalmedia.pdf');
     }
 }

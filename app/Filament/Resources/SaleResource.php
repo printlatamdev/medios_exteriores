@@ -6,13 +6,17 @@ use App\Filament\Resources\SaleResource\Pages;
 use App\Models\Customer;
 use App\Models\Externalmedia;
 use App\Models\Sale;
+use Closure;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Livewire;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ColumnGroup;
@@ -55,16 +59,28 @@ class SaleResource extends Resource
                                 ->label('Nombre de cliente')
                                 ->required(),
                             Textarea::make('description')
+                                ->label('Descripción')
                                 ->rows(3)
                                 ->cols(3),
                         ])->columnSpan(1),
-                    MoneyInput::make('total')->label('Total de pago')->disabled()->columnSpan(1),
+                    MoneyInput::make('total')
+                        ->label('Total de pago')
+                        ->readOnly()
+                        ->afterStateUpdated(function (Get $get, Set $set) {
+                            $result = $get('months') * $get('total_rental');
+                            $set('total', $result);
+                        })
+                        ->columnSpan(1),
                 ])->columns(3),
                 Section::make('Arrendamiento')->schema([
                     DatePicker::make('begin_date_rental')->label('Fecha de inicio'),
                     DatePicker::make('end_date_rental')->label('Fecha de finalización'),
-                    TextInput::make('months')->label('Cantidad de meses'),
-                    MoneyInput::make('total_rental')->label('Total mensual'),
+                    TextInput::make('months')
+                        ->label('Cantidad de meses')
+                        ->reactive(),
+                    TextInput::make('total_rental')
+                        ->label('Total mensual')
+                        ->reactive(),
                 ])->columns(4),
                 Section::make('Archivos adjuntos')->schema([
                     FileUpload::make('quote')
@@ -76,7 +92,7 @@ class SaleResource extends Resource
                         ->label('Orden de compra')
                         ->preserveFilenames(),
                 ])->columns(2),
-            /** Section::make('Cambio de lona')->schema([
+                /** Section::make('Cambio de lona')->schema([
                     DatePicker::make('tarp_date_change')->label('Fecha cambio de lona'),
                     MoneyInput::make('total_tarp')->label('Total'),
                 ])->columns(2), */

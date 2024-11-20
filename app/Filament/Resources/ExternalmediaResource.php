@@ -161,14 +161,14 @@ class ExternalmediaResource extends Resource
                     ->options(Mediatype::pluck('name', 'id')),
             ])
             ->actions([
-                Action::make('contrato')
+                /*Action::make('contrato')
                     ->icon('fas-file-contract')
                     ->color('info')
                     ->size(ActionSize::Large)
                     ->tooltip('Exportar contrato')
                     //->url(fn (Sale $sale): string => route('contract.pdf', $sale))
                     //->openUrlInNewTab()
-                    ->iconButton(),
+                    ->iconButton(),*/
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
