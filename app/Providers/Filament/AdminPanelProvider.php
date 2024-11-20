@@ -69,7 +69,7 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->maxContentWidth(MaxWidth::ScreenTwoExtraLarge)
+            ->maxContentWidth(MaxWidth::Full)
             //->unsavedChangesAlerts()
             ->authMiddleware([
                 Authenticate::class,
