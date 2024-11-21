@@ -16,7 +16,6 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\ActionSize;
 use Filament\Tables;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\TextColumn;
@@ -94,7 +93,7 @@ class SaleResource extends Resource
                         ->label('Orden de compra')
                         ->preserveFilenames(),
                 ])->columns(2),
-                /** Section::make('Cambio de lona')->schema([
+            /** Section::make('Cambio de lona')->schema([
                     DatePicker::make('tarp_date_change')->label('Fecha cambio de lona'),
                     MoneyInput::make('total_tarp')->label('Total'),
                 ])->columns(2), */
@@ -121,19 +120,19 @@ class SaleResource extends Resource
             ])
             ->actions([
                 MediaAction::make('purchaseorder')
-                    ->media(fn($record) => $record->purchaseorder)
+                    ->media(fn ($record) => 'storage/'.$record->purchaseorder)
                     ->icon('letsicon-order-fill')
                     ->iconButton()
                     ->label('Orden de compra')
-                    ->tooltip('Orden de compra')
+                    ->tooltip('Ver Orden de compra')
                     ->size('xl'),
-                    MediaAction::make('quote')
-                        ->media(fn($record) => $record->purchaseorder)
-                        ->icon('solar-chat-round-money-bold')
-                        ->iconButton()
-                        ->label('Cotización')
-                        ->tooltip('Cotización')
-                        ->size('xl'),
+                MediaAction::make('quote')
+                    ->media(fn ($record) => 'storage/'.$record->quote)
+                    ->icon('solar-chat-round-money-bold')
+                    ->iconButton()
+                    ->label('Cotización')
+                    ->tooltip('Ver Cotización')
+                    ->size('xl'),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),

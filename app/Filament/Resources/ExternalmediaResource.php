@@ -18,13 +18,12 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\ActionSize;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Hugomyb\FilamentMediaAction\Tables\Actions\MediaAction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
@@ -161,6 +160,14 @@ class ExternalmediaResource extends Resource
                     ->options(Mediatype::pluck('name', 'id')),
             ])
             ->actions([
+                MediaAction::make('gallery')
+                    ->media(fn ($record) => 'storage/'.$record->gallery[0])
+                    ->modalHeading(fn ($record) => $record->code)
+                    ->icon('fas-image')
+                    ->iconButton()
+                    ->label('Galeria')
+                    ->tooltip('Ver medios')
+                    ->size('xl'),
                 /*Action::make('contrato')
                     ->icon('fas-file-contract')
                     ->color('info')

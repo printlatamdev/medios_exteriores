@@ -17,7 +17,7 @@ class Sale extends Model
         'quote',
         'purchaseorder',
         'months',
-        'customer_id'
+        'customer_id',
     ];
 
     protected $casts = [
