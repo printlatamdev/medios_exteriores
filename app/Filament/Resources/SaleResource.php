@@ -6,12 +6,8 @@ use App\Filament\Resources\SaleResource\Pages;
 use App\Models\Customer;
 use App\Models\Externalmedia;
 use App\Models\Sale;
-use Closure;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Livewire;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -20,10 +16,12 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\ActionSize;
 use Filament\Tables;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Hugomyb\FilamentMediaAction\Tables\Actions\MediaAction;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 
 class SaleResource extends Resource
@@ -122,6 +120,20 @@ class SaleResource extends Resource
                 //
             ])
             ->actions([
+                MediaAction::make('purchaseorder')
+                    ->media(fn($record) => $record->purchaseorder)
+                    ->icon('letsicon-order-fill')
+                    ->iconButton()
+                    ->label('Orden de compra')
+                    ->tooltip('Orden de compra')
+                    ->size('xl'),
+                    MediaAction::make('quote')
+                        ->media(fn($record) => $record->purchaseorder)
+                        ->icon('solar-chat-round-money-bold')
+                        ->iconButton()
+                        ->label('Cotización')
+                        ->tooltip('Cotización')
+                        ->size('xl'),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),

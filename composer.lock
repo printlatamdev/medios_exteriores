@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c5696e3c3310147e2ed4f6162ef4c2e",
+    "content-hash": "010494c28a54d74b5b4e4b13cecd8d2c",
     "packages": [
         {
             "name": "althinect/filament-spatie-roles-permissions",
@@ -701,6 +701,79 @@
                 }
             ],
             "time": "2023-12-11T17:09:12+00:00"
+        },
+        {
+            "name": "codeat3/blade-solar-icons",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codeat3/blade-solar-icons.git",
+                "reference": "a6df3c4951591fe313399ebbbc6ac671c22ac631"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codeat3/blade-solar-icons/zipball/a6df3c4951591fe313399ebbbc6ac671c22ac631",
+                "reference": "a6df3c4951591fe313399ebbbc6ac671c22ac631",
+                "shasum": ""
+            },
+            "require": {
+                "blade-ui-kit/blade-icons": "^1.1",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "codeat3/blade-icon-generation-helpers": "^0.8",
+                "codeat3/phpcs-styles": "^1.0",
+                "iconify/json": "^2.2",
+                "orchestra/testbench": "^6.0|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.0|^10.5|^11.0",
+                "symfony/process": "^5.0|^6.0|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Codeat3\\BladeSolarIcons\\BladeSolarIconsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Codeat3\\BladeSolarIcons\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Swapnil Sarwe",
+                    "homepage": "https://swapnilsarwe.com"
+                },
+                {
+                    "name": "Dries Vints",
+                    "homepage": "https://driesvints.com"
+                }
+            ],
+            "description": "A package to easily make use of \"Solar Icons\" in your Laravel Blade views.",
+            "homepage": "https://github.com/codeat3/blade-solar-icons",
+            "keywords": [
+                "Solar Icons",
+                "blade",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/codeat3/blade-solar-icons/issues",
+                "source": "https://github.com/codeat3/blade-solar-icons/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/swapnilsarwe",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-06-07T07:44:26+00:00"
         },
         {
             "name": "composer/semver",
@@ -2947,6 +3020,79 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
+            "name": "hugomyb/filament-media-action",
+            "version": "v3.1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hugomyb/filament-media-action.git",
+                "reference": "36a17dd738bdeb587a1183196334b57377fb0198"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hugomyb/filament-media-action/zipball/36a17dd738bdeb587a1183196334b57377fb0198",
+                "reference": "36a17dd738bdeb587a1183196334b57377fb0198",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^7.9",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.1",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Hugomyb\\FilamentMediaAction\\FilamentMediaActionServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentMediaAction": "Hugomyb\\FilamentMediaAction\\Facades\\FilamentMediaAction"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hugomyb\\FilamentMediaAction\\": "src/",
+                    "Hugomyb\\FilamentMediaAction\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mayonobe Hugo",
+                    "email": "hugomayonobe@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Automatically display your media (video, audio, document, image, ...) with an action",
+            "homepage": "https://github.com/hugomyb/filament-media-action",
+            "keywords": [
+                "filament-media-action",
+                "hugomyb",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/hugomyb/filament-media-action/issues",
+                "source": "https://github.com/hugomyb/filament-media-action"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/hugomyb",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-11-10T19:22:24+00:00"
+        },
+        {
             "name": "jaybizzle/crawler-detect",
             "version": "v1.2.121",
             "source": {
@@ -4548,6 +4694,70 @@
                 }
             ],
             "time": "2024-10-10T12:33:01+00:00"
+        },
+        {
+            "name": "mansoor/blade-lets-icons",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mansoorkhan96/blade-lets-icons.git",
+                "reference": "1dfa300ddcd171fc21e9fa7b49e85ff01d555658"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mansoorkhan96/blade-lets-icons/zipball/1dfa300ddcd171fc21e9fa7b49e85ff01d555658",
+                "reference": "1dfa300ddcd171fc21e9fa7b49e85ff01d555658",
+                "shasum": ""
+            },
+            "require": {
+                "blade-ui-kit/blade-icons": "^1.6",
+                "illuminate/support": "^9.0|^10.0|^11.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.0|^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mansoor\\LetsIcons\\BladeLetsIconsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mansoor\\LetsIcons\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mansoor Ahmed"
+                }
+            ],
+            "description": "A package to easily make use of Lets Icons in your Laravel Blade views.",
+            "homepage": "https://github.com/mansoor96/blade-lets-icons",
+            "keywords": [
+                "Lets Icons",
+                "blade",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/mansoorkhan96/blade-lets-icons/issues",
+                "source": "https://github.com/mansoorkhan96/blade-lets-icons/tree/v1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/mansoorkhan96",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-05-19T05:15:13+00:00"
         },
         {
             "name": "markbaker/complex",
