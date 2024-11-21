@@ -93,7 +93,7 @@ class SaleResource extends Resource
                         ->label('Orden de compra')
                         ->preserveFilenames(),
                 ])->columns(2),
-            /** Section::make('Cambio de lona')->schema([
+                /** Section::make('Cambio de lona')->schema([
                     DatePicker::make('tarp_date_change')->label('Fecha cambio de lona'),
                     MoneyInput::make('total_tarp')->label('Total'),
                 ])->columns(2), */
@@ -121,14 +121,14 @@ class SaleResource extends Resource
             ])
             ->actions([
                 MediaAction::make('purchaseorder')
-                    ->media(fn ($record) => 'storage/'.$record->purchaseorder)
+                    ->media(fn($record) => 'storage/' . $record->purchaseorder)
                     ->icon('fas-list')
                     ->iconButton()
                     ->label('Orden de compra')
                     ->tooltip('Ver Orden de compra')
                     ->size('xl'),
                 MediaAction::make('quote')
-                    ->media(fn ($record) => 'storage/'.$record->quote)
+                    ->media(fn($record) => 'storage/' . $record->quote)
                     ->icon('solar-chat-round-money-bold')
                     ->iconButton()
                     ->label('Cotización')

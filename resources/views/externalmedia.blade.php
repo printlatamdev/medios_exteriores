@@ -85,9 +85,11 @@
         ul li {
             list-style: none;
         }
-        .list{
+
+        .list {
             margin-left: 20px;
         }
+
         .mainTable {
             width: 100%;
         }
@@ -115,7 +117,7 @@
                 <img src="{{ public_path('storage/' . $item->gallery[0]) }}" alt="logo" class="mediaImage">
                 <div class="footerImage">
                     <div class="infoFooter">
-                        <h1 style="margin: 0px; margin-left: 12px; margin-top: 12px">{{ $item->mediatype['name'] }}
+                        <h1 style="margin: 0px; margin-left: 15px; margin-top: 15px">{{ $item->mediatype['name'] }}
                             {{ $item->code }}</h1>
                         <p style="margin: 0px">
                             <span>
@@ -127,7 +129,7 @@
                     <div class="listContainer">
                         <table class="mainTable" style="margin: 0px">
                             <tr>
-                                <td style="width: 80%">
+                                <td style="width: 40%">
                                     <ul class="list">
                                         <li><span class="fontsemibold">-Distrito:</span> {{ $item->district['name'] }}
                                         </li>
@@ -136,6 +138,15 @@
                                         <li><span class="fontsemibold">-Flujo Vehícular:</span>
                                             {{ $item->traffic_flow }}</li>
                                         <li><span class="fontsemibold">-Iluminación:</span> {{ $item->lighting }}</li>
+                                    </ul>
+                                </td>
+                                <td style="width: 40%">
+                                    <ul class="list">
+                                        <li><span class="fontsemibold">-Arrendamiento:</span> ${{ $item->rental }} +
+                                            IVA
+                                        </li>
+                                        <li><span class="fontsemibold">-Iluminación:</span> ${{ $item->production }} +
+                                            IVA</li>
                                     </ul>
                                 </td>
                                 <td style="width: 20%">
@@ -150,4 +161,5 @@
         @endforeach
     </div>
 </body>
+
 </html>
