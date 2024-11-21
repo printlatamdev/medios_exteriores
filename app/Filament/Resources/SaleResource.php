@@ -104,10 +104,11 @@ class SaleResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('externalmedias.code')->label('Medio'),
+                TextColumn::make('externalmedias.code')->label('Medios'),
+                TextColumn::make('customer.name')->label('Cliente'),
                 ColumnGroup::make('Arrendamiento', [
-                    TextColumn::make('expiration_date_rental')->label('Fecha de vencimiento arrendamiento'),
-                    TextColumn::make('payment_date_rental')->label('Fecha de pago arrendamiento'),
+                    TextColumn::make('begin_date_rental')->label('Fecha de inicio'),
+                    TextColumn::make('expiration_date_rental')->label('Fecha final'),
                     TextColumn::make('total_rental')->label('Total de arrendamiento'),
                 ]),
                 /**ColumnGroup::make('Cambio de lona', [
@@ -121,7 +122,7 @@ class SaleResource extends Resource
             ->actions([
                 MediaAction::make('purchaseorder')
                     ->media(fn ($record) => 'storage/'.$record->purchaseorder)
-                    ->icon('letsicon-order-fill')
+                    ->icon('fas-list')
                     ->iconButton()
                     ->label('Orden de compra')
                     ->tooltip('Ver Orden de compra')
