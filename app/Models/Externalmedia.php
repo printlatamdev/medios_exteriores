@@ -21,6 +21,8 @@ class Externalmedia extends Model
         'rental',
         'production',
         'mediatype_id',
+        'department_id',
+        'municipality_id',
         'district_id',
     ];
 
@@ -48,5 +50,14 @@ class Externalmedia extends Model
     public function sales()
     {
         return $this->belongsToMany(Sale::class, 'externalmedia_sale');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    public function municipality()
+    {
+        return $this->belongsTo(Municipality::class);
     }
 }

@@ -18,8 +18,8 @@ class Municipality extends Model
         return $this->hasMany(District::class);
     }
 
-    public function location()
+    public function externalmedia()
     {
-        return $this->hasMany(Location::class);
+        return $this->hasMany(Externalmedia::class);
     }
 }

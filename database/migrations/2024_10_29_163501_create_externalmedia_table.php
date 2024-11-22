@@ -25,6 +25,8 @@ return new class extends Migration
             $table->float('rental', 11, 2)->nullable();
             $table->string('production')->nullable();
             $table->foreignId('mediatype_id')->constrained();
+            $table->foreignId('department_id')->constrained();
+            $table->foreignId('municipality_id')->constrained();
             $table->foreignId('district_id')->constrained();
             $table->timestamps();
         });

@@ -166,7 +166,7 @@ class ExternalmediaResource extends Resource
                     ->icon('fas-image')
                     ->iconButton()
                     ->label('Galeria')
-                    ->tooltip('Ver medio principal')
+                    ->tooltip('Ver imagen principal')
                     ->size('xl'),
                 /*Action::make('contrato')
                     ->icon('fas-file-contract')
