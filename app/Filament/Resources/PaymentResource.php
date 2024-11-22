@@ -29,7 +29,9 @@ class PaymentResource extends Resource
                     ->label('Contrato')
                     ->options(Sale::pluck('name', 'id'))
                     ->required()
-                    ->searchable(),
+                    ->searchable()
+                    ->searchingMessage('Buscando contrato...')
+                    ->searchDebounce(500),
             ]);
     }
 

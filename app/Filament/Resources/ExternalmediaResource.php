@@ -50,6 +50,8 @@ class ExternalmediaResource extends Resource
                         ->label('Tipo de medio')
                         ->options(Mediatype::all()->pluck('name', 'id'))
                         ->searchable()
+                        ->searchingMessage('Buscando tipo de medio...')
+                        ->searchDebounce(500)
                         ->required()
                         ->columnSpan(1),
                     Toggle::make('status')
@@ -86,20 +88,28 @@ class ExternalmediaResource extends Resource
                     Select::make('department_id')
                         ->label('Departamento')
                         ->reactive()
-                        //->required()
+                        ->required()
+                        ->searchable()
+                        ->searchingMessage('Buscando departamento...')
+                        ->searchDebounce(500)
+                        ->searchingMessage('Buscando medios...')
                         ->options(Department::pluck('name', 'id'))
                         ->columnSpan(1),
                     Select::make('municipality_id')
                         ->label('Municipio')
                         ->reactive()
                         //->required()
-                        ->options(fn (Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
+                        ->options(fn(Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
                         ->searchable()
+                        ->searchingMessage('Buscando municipio...')
+                        ->searchDebounce(500)
                         ->columnSpan(1),
                     Select::make('district_id')
                         ->label('Distrito')
-                        ->options(fn (Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
+                        ->options(fn(Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
                         ->searchable()
+                        ->searchingMessage('Buscando distrito...')
+                        ->searchDebounce(500)
                         ->required()
                         ->columnSpan(1),
                     Textarea::make('address')->label('Dirección')->columnSpan(3)->required(),
@@ -131,11 +141,14 @@ class ExternalmediaResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('code')->label('Código')->searchable(),
+                TextColumn::make('code')->label('Código')
+                    ->searchable()
+                    ->searchingMessage('Buscando medios...')
+                    ->searchDebounce(500),
                 IconColumn::make('status')
                     ->boolean()
                     ->label('Disponibilidad')
-                    ->tooltip(fn (Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
+                    ->tooltip(fn(Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
                     ->falseIcon('far-circle-xmark')
                     ->trueIcon('far-circle-check')
                     ->trueColor('success')
@@ -152,6 +165,8 @@ class ExternalmediaResource extends Resource
                 Tables\Filters\SelectFilter::make('district')
                     ->label('Distrito')
                     ->searchable()
+                    ->searchingMessage('Buscando distrito...')
+                    ->searchDebounce(500)
                     ->relationship('district', 'name')
                     ->options(District::pluck('name', 'id')),
                 Tables\Filters\SelectFilter::make('mediatype')
@@ -161,8 +176,8 @@ class ExternalmediaResource extends Resource
             ])
             ->actions([
                 MediaAction::make('gallery')
-                    ->media(fn ($record) => 'storage/'.$record->gallery[0])
-                    ->modalHeading(fn ($record) => $record->code)
+                    ->media(fn($record) => 'storage/' . $record->gallery[0])
+                    ->modalHeading(fn($record) => $record->code)
                     ->icon('fas-image')
                     ->iconButton()
                     ->label('Galeria')

@@ -37,6 +37,8 @@ class BudgetResource extends Resource
                     ->relationship('externalmedias', 'code')
                     ->options(Externalmedia::pluck('code', 'id'))
                     ->searchable()
+                    ->searchingMessage('Buscando medios...')
+                    ->searchDebounce(500)
                     ->required(),
                 MoneyInput::make('total_payment')->label('Total de gasto')->disabled(),
                 Section::make('Fianza')->schema([

@@ -26,6 +26,7 @@ use Hugomyb\FilamentMediaAction\Tables\Actions\MediaAction;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
+use Illuminate\Database\Eloquent\Model;
 
 class SaleResource extends Resource
 {
@@ -42,71 +43,69 @@ class SaleResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Grid::make()->schema([
-                Repeater::make('externalmedias')
-                    ->relationship('externalmedias')
-                    ->label('')
-                    ->schema([
-                        Section::make('')->schema([
-                            Select::make('externalmedia_id')
-                                ->label('Medio externo')
-                                ->relationship('externalmedias', 'code')
-                                ->options(Externalmedia::pluck('code', 'id'))
-                                ->required()
-                                ->searchable()
-                                ->columnSpan(1),
-                            Select::make('customer_id')
-                                ->label('Cliente')
-                                ->options(Customer::pluck('name', 'id'))
-                                ->required()
-                                ->searchable()
-                                ->createOptionForm([
-                                    TextInput::make('name')
-                                        ->label('Nombre de cliente')
-                                        ->required(),
-                                    Textarea::make('description')
-                                        ->label('Descripción')
-                                        ->rows(3)
-                                        ->cols(3),
-                                ])->columnSpan(1),
-                            MoneyInput::make('total')
-                                ->label('Total de pago')
-                                ->readOnly()
-                                ->live()
-                                ->afterStateUpdated(function (Get $get, Set $set) {
-                                    $result = $get('months') * $get('total_rental');
-                                    $set('total', $result);
-                                })
-                                ->columnSpan(1),
-                        ])->columns(3),
-                        Section::make('Arrendamiento')->schema([
-                            DatePicker::make('begin_date_rental')->label('Fecha de inicio'),
-                            DatePicker::make('expiration_date_rental')->label('Fecha de finalización'),
-                            TextInput::make('months')
-                                ->label('Cantidad de meses')
-                                ->reactive()
-                                ->live(),
-                            TextInput::make('total_rental')
-                                ->label('Total mensual')
-                                ->reactive()
-                                ->live(),
-                        ])->columns(4),
-                        Section::make('Archivos adjuntos')->schema([
-                            FileUpload::make('quote')
-                                ->directory('files')
-                                ->label('Cotización')
-                                ->preserveFilenames(),
-                            FileUpload::make('purchaseorder')
-                                ->directory('files')
-                                ->label('Orden de compra')
-                                ->preserveFilenames(),
-                        ])->columns(2),
-                        /** Section::make('Cambio de lona')->schema([
+            Section::make('')->schema([
+                Select::make('externalmedia_id')
+                    ->label('Medio externo')
+                    ->relationship('externalmedias', 'code')
+                    ->options(Externalmedia::pluck('code', 'id'))
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->code} {$record->address}")
+                    ->required()
+                    ->searchable()
+                    ->searchingMessage('Buscando medios...')
+                    ->searchDebounce(500)
+                    ->columnSpan(2),
+                Select::make('customer_id')
+                    ->label('Cliente')
+                    ->options(Customer::pluck('name', 'id'))
+                    ->required()
+                    ->searchable()
+                    ->searchingMessage('Buscando cliente...')
+                    ->searchDebounce(500)
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->label('Nombre de cliente')
+                            ->required(),
+                        Textarea::make('description')
+                            ->label('Descripción')
+                            ->rows(3)
+                            ->cols(3),
+                    ])->columnSpan(2),
+                MoneyInput::make('total')
+                    ->label('Total de pago')
+                    ->readOnly()
+                    ->live()
+                    ->afterStateUpdated(function (Get $get, Set $set) {
+                        $result = $get('months') * $get('total_rental');
+                        $set('total', $result);
+                    })
+                    ->columnSpan(1),
+            ])->columns(5),
+            Section::make('Arrendamiento')->schema([
+                DatePicker::make('begin_date_rental')->label('Fecha de inicio'),
+                DatePicker::make('expiration_date_rental')->label('Fecha de finalización'),
+                TextInput::make('months')
+                    ->label('Cantidad de meses')
+                    ->reactive()
+                    ->live(),
+                TextInput::make('total_rental')
+                    ->label('Total mensual')
+                    ->reactive()
+                    ->live(),
+            ])->columns(4),
+            Section::make('Archivos adjuntos')->schema([
+                FileUpload::make('quote')
+                    ->directory('files')
+                    ->label('Cotización')
+                    ->preserveFilenames(),
+                FileUpload::make('purchaseorder')
+                    ->directory('files')
+                    ->label('Orden de compra')
+                    ->preserveFilenames(),
+            ])->columns(2),
+            /** Section::make('Cambio de lona')->schema([
                     DatePicker::make('tarp_date_change')->label('Fecha cambio de lona'),
                     MoneyInput::make('total_tarp')->label('Total'),
                 ])->columns(2), */
-                    ])->columnSpan('full'),
-            ])
         ]);
     }
 
