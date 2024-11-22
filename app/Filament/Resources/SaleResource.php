@@ -48,7 +48,7 @@ class SaleResource extends Resource
                     ->label('Medio externo')
                     ->relationship('externalmedias', 'code')
                     ->options(Externalmedia::pluck('code', 'id'))
-                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->code} {$record->address}")
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->code} - {$record->address}")
                     ->required()
                     ->searchable()
                     ->searchingMessage('Buscando medios...')
@@ -56,6 +56,7 @@ class SaleResource extends Resource
                     ->columnSpan(2),
                 Select::make('customer_id')
                     ->label('Cliente')
+                    ->relationship('customer', 'name')
                     ->options(Customer::pluck('name', 'id'))
                     ->required()
                     ->searchable()

@@ -16,6 +16,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 
 class BudgetResource extends Resource
@@ -36,6 +37,7 @@ class BudgetResource extends Resource
                     ->label('Medio externo')
                     ->relationship('externalmedias', 'code')
                     ->options(Externalmedia::pluck('code', 'id'))
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->code} {$record->address}")
                     ->searchable()
                     ->searchingMessage('Buscando medios...')
                     ->searchDebounce(500)

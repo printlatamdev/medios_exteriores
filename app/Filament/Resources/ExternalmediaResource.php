@@ -92,7 +92,6 @@ class ExternalmediaResource extends Resource
                         ->searchable()
                         ->searchingMessage('Buscando departamento...')
                         ->searchDebounce(500)
-                        ->searchingMessage('Buscando medios...')
                         ->options(Department::pluck('name', 'id'))
                         ->columnSpan(1),
                     Select::make('municipality_id')
@@ -142,9 +141,7 @@ class ExternalmediaResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('code')->label('Código')
-                    ->searchable()
-                    ->searchingMessage('Buscando medios...')
-                    ->searchDebounce(500),
+                    ->searchable(),
                 IconColumn::make('status')
                     ->boolean()
                     ->label('Disponibilidad')
@@ -165,8 +162,6 @@ class ExternalmediaResource extends Resource
                 Tables\Filters\SelectFilter::make('district')
                     ->label('Distrito')
                     ->searchable()
-                    ->searchingMessage('Buscando distrito...')
-                    ->searchDebounce(500)
                     ->relationship('district', 'name')
                     ->options(District::pluck('name', 'id')),
                 Tables\Filters\SelectFilter::make('mediatype')
