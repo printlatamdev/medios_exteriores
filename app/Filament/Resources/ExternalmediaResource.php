@@ -27,6 +27,7 @@ use Hugomyb\FilamentMediaAction\Tables\Actions\MediaAction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Filament\Tables\Actions\Action;
 
 class ExternalmediaResource extends Resource
 {
@@ -46,6 +47,9 @@ class ExternalmediaResource extends Resource
                     TextInput::make('code')->label('Código')
                         ->required()
                         ->columnSpan(2),
+
+                    TextInput::make('clase')->label('Clase')->columnSpan(2), // Nuevo campo
+
                     Select::make('mediatype_id')
                         ->label('Tipo de medio')
                         ->options(Mediatype::all()->pluck('name', 'id'))
@@ -54,6 +58,7 @@ class ExternalmediaResource extends Resource
                         ->searchDebounce(500)
                         ->required()
                         ->columnSpan(1),
+
                     Toggle::make('status')
                         ->label('Disponibilidad')
                         ->required()
@@ -61,7 +66,9 @@ class ExternalmediaResource extends Resource
                         ->offColor('danger')
                         ->inline(false)
                         ->columnSpan(1),
+
                     TextInput::make('traffic_flow')->label('Flujo vehícular')->columnSpan(1),
+
                     Select::make('lighting')
                         ->label('Iluminación')
                         ->options([
@@ -70,11 +77,11 @@ class ExternalmediaResource extends Resource
                             'N/A' => 'N/A',
                             'S/I' => 'S/I',
                         ])->columnSpan(1),
-                    TextInput::make('rental')->label('Arrendamiento')
-                        ->columnSpan(1),
-                    TextInput::make('production')->label('Producción')
-                        ->columnSpan(1),
+
+                    TextInput::make('rental')->label('Arrendamiento')->columnSpan(1),
+                    TextInput::make('production')->label('Producción')->columnSpan(1),
                 ])->columns(4),
+
                 Section::make('Multimedia')->schema([
                     FileUpload::make('gallery')
                         ->multiple()
@@ -84,6 +91,7 @@ class ExternalmediaResource extends Resource
                         ->image()
                         ->panelLayout('grid'),
                 ]),
+
                 Section::make('Ubicación detallada')->schema([
                     Select::make('department_id')
                         ->label('Departamento')
@@ -92,17 +100,18 @@ class ExternalmediaResource extends Resource
                         ->searchable()
                         ->searchingMessage('Buscando departamento...')
                         ->searchDebounce(500)
-                        ->options(Department::pluck('name', 'id'))
+                        ->relationship('department', 'name')
                         ->columnSpan(1),
+
                     Select::make('municipality_id')
                         ->label('Municipio')
                         ->reactive()
-                        //->required()
                         ->options(fn(Get $get) => Municipality::where('department_id', (int) $get('department_id'))->pluck('name', 'id'))
                         ->searchable()
                         ->searchingMessage('Buscando municipio...')
                         ->searchDebounce(500)
                         ->columnSpan(1),
+
                     Select::make('district_id')
                         ->label('Distrito')
                         ->options(fn(Get $get) => District::where('municipality_id', (int) $get('municipality_id'))->pluck('name', 'id'))
@@ -111,24 +120,16 @@ class ExternalmediaResource extends Resource
                         ->searchDebounce(500)
                         ->required()
                         ->columnSpan(1),
+
                     Textarea::make('address')->label('Dirección')->columnSpan(3)->required(),
-                    /**LocationPickr::make('location')
-                        ->label('Locación')
-                        ->mapControls([
-                            'mapTypeControl' => true,
-                            'scaleControl' => true,
-                            'streetViewControl' => true,
-                            'rotateControl' => true,
-                            'fullscreenControl' => true,
-                            'zoomControl' => false,
-                        ])
-                        ->myLocationButtonLabel('Mapa')
-                        ->defaultZoom(5)
-                        ->draggable()
-                        ->clickable()
-                        ->defaultLocation([13.677066932239907, -89.19176963659241])
-                        ->columnSpan(3), */
+
+                    Textarea::make('location_embed') // Nuevo campo
+                        ->label('Iframe de ubicación')
+                        ->helperText('Pega aquí el iframe de Google Maps')
+                        ->rows(3)
+                        ->columnSpan(3),
                 ])->columns(3),
+
                 Section::make('Medidas')->schema([
                     TextInput::make('width')->label('Ancho'),
                     TextInput::make('height')->label('Alto'),
@@ -136,12 +137,25 @@ class ExternalmediaResource extends Resource
             ]);
     }
 
+
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(
+                fn($query) =>
+                $query->with(['mediatype:id,name', 'district:id,name', 'municipality:id,name', 'department:id,name'])
+            )
+
             ->columns([
-                TextColumn::make('code')->label('Código')
+                TextColumn::make('code')
+                    ->label('Código')
                     ->searchable(),
+
+                TextColumn::make('clase')
+                    ->label('Clase')
+                    ->sortable()
+                    ->searchable(),
+
                 IconColumn::make('status')
                     ->boolean()
                     ->label('Disponibilidad')
@@ -150,9 +164,17 @@ class ExternalmediaResource extends Resource
                     ->trueIcon('far-circle-check')
                     ->trueColor('success')
                     ->falseColor('warning'),
-                TextColumn::make('address')->label('Dirección'),
-                TextColumn::make('mediatype.name')->label('Tipo de medio')->searchable(),
-                TextColumn::make('district.name')->label('Distrito')->searchable(),
+
+                TextColumn::make('address')
+                    ->label('Dirección'),
+
+                TextColumn::make('mediatype.name')
+                    ->label('Tipo de medio')
+                    ->searchable(),
+
+                TextColumn::make('district.name')
+                    ->label('Distrito')
+                    ->searchable(),
                 ColumnGroup::make('Medidas', [
                     TextColumn::make('width')->label('Ancho'),
                     TextColumn::make('height')->label('Alto'),
@@ -161,39 +183,42 @@ class ExternalmediaResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('district')
                     ->label('Distrito')
-                    ->searchable()
                     ->relationship('district', 'name')
-                    ->options(District::pluck('name', 'id')),
+                    ->searchable(),
+
                 Tables\Filters\SelectFilter::make('mediatype')
                     ->label('Tipo de medio')
                     ->relationship('mediatype', 'name')
-                    ->options(Mediatype::pluck('name', 'id')),
+                    ->searchable(),
             ])
-            ->actions([
-                MediaAction::make('gallery')
-                    ->media(fn($record) => 'storage/' . $record->gallery[0])
-                    ->modalHeading(fn($record) => $record->code)
-                    ->icon('fas-image')
-                    ->iconButton()
-                    ->label('Galeria')
-                    ->tooltip('Ver imagen principal')
-                    ->size('xl'),
-                /*Action::make('contrato')
-                    ->icon('fas-file-contract')
-                    ->color('info')
-                    ->size(ActionSize::Large)
-                    ->tooltip('Exportar contrato')
-                    //->url(fn (Sale $sale): string => route('contract.pdf', $sale))
-                    //->openUrlInNewTab()
-                    ->iconButton(),*/
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
-                ])->tooltip('Acciones'),
-            ])
+           ->actions([
+    MediaAction::make('gallery')
+        ->media(fn($record) => 'storage/' . $record->gallery[0])
+        ->modalHeading(fn($record) => $record->code)
+        ->icon('fas-image')
+        ->iconButton()
+        ->label('Galería')
+        ->tooltip('Ver imagen principal')
+        ->size('xl'),
+
+    Action::make('ver_mapa')
+        ->label('Detalles')
+    ->icon('heroicon-m-document-text') // Changed icon
+        ->color('info')
+        ->modalHeading('Ubicación en el mapa')
+        ->modalSubheading(fn($record) => $record->code)
+        ->modalContent(content: fn($record) => view('components.mapa-modal', ['record' => $record,'iframe' => $record->location_embed]))
+        ->modalSubmitAction(false) // 🔴 Oculta el botón de enviar
+        ->visible(fn($record) => !empty($record->location_embed)),
+
+    Tables\Actions\ActionGroup::make([
+        Tables\Actions\EditAction::make(),
+        Tables\Actions\DeleteAction::make(),
+    ])->tooltip('Acciones'),
+])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    //Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\BulkAction::make('Export')
                         ->label('Generar disponibilidad')
                         ->color('success')
@@ -210,6 +235,7 @@ class ExternalmediaResource extends Resource
                 ]),
             ]);
     }
+
 
     public static function getRelations(): array
     {

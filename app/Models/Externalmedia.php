@@ -8,23 +8,25 @@ class Externalmedia extends Model
 {
     protected $table = 'externalmedia';
 
-    protected $fillable = [
+   protected $fillable = [
         'code',
+        'clase', // 👈 Asegúrate de que esté aquí
+        'location_embed', // 👈 Este también
         'status',
-        'address',
-        'location',
-        'gallery',
-        'width',
-        'height',
         'traffic_flow',
         'lighting',
         'rental',
         'production',
-        'mediatype_id',
+        'gallery',
         'department_id',
         'municipality_id',
         'district_id',
+        'address',
+        'width',
+        'height',
+        'mediatype_id',
     ];
+
 
     protected $casts = [
         'status' => 'boolean',
