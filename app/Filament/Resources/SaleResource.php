@@ -38,7 +38,6 @@ class SaleResource extends Resource
 
     protected static ?string $navigationIcon = 'fas-file-contract';
 
-    //protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
@@ -54,6 +53,7 @@ class SaleResource extends Resource
                     ->searchingMessage('Buscando medios...')
                     ->searchDebounce(500)
                     ->columnSpan(2),
+    
                 Select::make('customer_id')
                     ->label('Cliente')
                     ->relationship('customer', 'name')
@@ -70,7 +70,9 @@ class SaleResource extends Resource
                             ->label('Descripción')
                             ->rows(3)
                             ->cols(3),
-                    ])->columnSpan(2),
+                    ])
+                    ->columnSpan(2),
+    
                 MoneyInput::make('total')
                     ->label('Total de pago')
                     ->readOnly()
@@ -81,13 +83,19 @@ class SaleResource extends Resource
                     })
                     ->columnSpan(1),
             ])->columns(5),
+    
             Section::make('Arrendamiento')->schema([
-                DatePicker::make('begin_date_rental')->label('Fecha de inicio'),
-                DatePicker::make('expiration_date_rental')->label('Fecha de finalización'),
+                DatePicker::make('begin_date_rental')
+                    ->label('Fecha de inicio'),
+    
+                DatePicker::make('expiration_date_rental')
+                    ->label('Fecha de finalización'),
+    
                 TextInput::make('months')
                     ->label('Cantidad de meses')
                     ->reactive()
                     ->live(),
+    
                 TextInput::make('total_rental')
                     ->label('Total mensual')
                     ->reactive()
@@ -98,15 +106,12 @@ class SaleResource extends Resource
                     ->directory('files')
                     ->label('Cotización')
                     ->preserveFilenames(),
-                FileUpload::make('purchaseorder')
+            
+                FileUpload::make('purchaseorder')  // ← aquí inicia correctamente
                     ->directory('files')
                     ->label('Orden de compra')
-                    ->preserveFilenames(),
-            ])->columns(2),
-            /** Section::make('Cambio de lona')->schema([
-                    DatePicker::make('tarp_date_change')->label('Fecha cambio de lona'),
-                    MoneyInput::make('total_tarp')->label('Total'),
-                ])->columns(2), */
+                    ->preserveFilenames(), // ← esta coma está bien
+            ]) 
         ]);
     }
 

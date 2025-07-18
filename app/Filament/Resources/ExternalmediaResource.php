@@ -87,7 +87,7 @@ class ExternalmediaResource extends Resource
                         ->multiple()
                         ->directory('media')
                         ->label('Galería de medios')
-                        ->preserveFilenames()
+                        //->preserveFilenames()
                         ->image()
                         ->panelLayout('grid'),
                 ]),
