@@ -43,17 +43,20 @@ class SaleResource extends Resource
     {
         return $form->schema([
             Section::make('')->schema([
-                Select::make('externalmedia_id')
+                Select::make('externalmedias')
                     ->label('Medio externo')
-                    ->relationship('externalmedias', 'code')
-                    ->options(Externalmedia::pluck('code', 'id'))
-                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->code} - {$record->address}")
-                    ->required()
+                    // ->relationship('externalmedias', 'code')
+                    ->getOptionLabelFromRecordUsing(fn(Model $record) => "{$record->code} - {$record->address}")
+                    ->multiple(false) // ← para seleccionar solo uno
+                    ->preload()
                     ->searchable()
                     ->searchingMessage('Buscando medios...')
                     ->searchDebounce(500)
+                    ->options(Externalmedia::disponiblesParaContrato()) // ← solo disponibles
+                    ->required()
                     ->columnSpan(2),
-    
+
+
                 Select::make('customer_id')
                     ->label('Cliente')
                     ->relationship('customer', 'name')
@@ -72,7 +75,7 @@ class SaleResource extends Resource
                             ->cols(3),
                     ])
                     ->columnSpan(2),
-    
+
                 MoneyInput::make('total')
                     ->label('Total de pago')
                     ->readOnly()
@@ -83,19 +86,19 @@ class SaleResource extends Resource
                     })
                     ->columnSpan(1),
             ])->columns(5),
-    
+
             Section::make('Arrendamiento')->schema([
                 DatePicker::make('begin_date_rental')
                     ->label('Fecha de inicio'),
-    
+
                 DatePicker::make('expiration_date_rental')
                     ->label('Fecha de finalización'),
-    
+
                 TextInput::make('months')
                     ->label('Cantidad de meses')
                     ->reactive()
                     ->live(),
-    
+
                 TextInput::make('total_rental')
                     ->label('Total mensual')
                     ->reactive()
@@ -106,12 +109,12 @@ class SaleResource extends Resource
                     ->directory('files')
                     ->label('Cotización')
                     ->preserveFilenames(),
-            
+
                 FileUpload::make('purchaseorder')  // ← aquí inicia correctamente
                     ->directory('files')
                     ->label('Orden de compra')
                     ->preserveFilenames(), // ← esta coma está bien
-            ]) 
+            ])
         ]);
     }
 
@@ -126,10 +129,6 @@ class SaleResource extends Resource
                     TextColumn::make('expiration_date_rental')->label('Fecha final'),
                     TextColumn::make('total_rental')->label('Total de arrendamiento'),
                 ]),
-                /**ColumnGroup::make('Cambio de lona', [
-                    TextColumn::make('tarp_date_change')->label('Fecha de cambio'),
-                    TextColumn::make('total_tarp')->label('Total'),
-                ]), */
             ])
             ->filters([
                 //

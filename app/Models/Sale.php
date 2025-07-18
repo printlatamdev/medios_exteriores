@@ -25,10 +25,11 @@ class Sale extends Model
         'purchaseorder' => 'array',
     ];
 
-    public function externalmedias()
-    {
-        return $this->belongsToMany(Externalmedia::class, 'externalmedia_sale');
-    }
+   public function externalmedias()
+{
+    return $this->belongsToMany(Externalmedia::class);
+}
+
 
     public function payment()
     {
@@ -39,4 +40,15 @@ class Sale extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($sale) {
+            $sale->externalmedias()->detach(); // <- elimina relaciones en tabla intermedia
+        });
+    }
+
+        
 }

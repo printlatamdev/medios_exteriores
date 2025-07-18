@@ -145,35 +145,50 @@ class ExternalmediaResource extends Resource
                 fn($query) =>
                 $query->with(['mediatype:id,name', 'district:id,name', 'municipality:id,name', 'department:id,name'])
             )
-
             ->columns([
                 TextColumn::make('code')
                     ->label('Código')
                     ->searchable(),
-
                 TextColumn::make('clase')
                     ->label('Clase')
                     ->sortable()
                     ->searchable(),
 
                 IconColumn::make('status')
+                    ->label('Operativo')
+                    ->tooltip(fn(Model $record) => $record->status ? 'Disponible para operar' : 'Inhabilitado por permisos u otros motivos')
                     ->boolean()
-                    ->label('Disponibilidad')
-                    ->tooltip(fn(Model $record) => $record->status ? 'Disponible' : 'Medio vendido')
-                    ->falseIcon('far-circle-xmark')
-                    ->trueIcon('far-circle-check')
+                    ->trueIcon('heroicon-m-check-circle')
+                    ->falseIcon('heroicon-m-x-circle')
                     ->trueColor('success')
-                    ->falseColor('warning'),
+                    ->falseColor('danger'),
+
+                IconColumn::make('is_rented')
+                    ->label('Arrendada')
+                    ->tooltip(fn(Model $record) => $record->isRented() ? 'Este medio está alquilado actualmente' : 'Disponible para arrendar')
+                    ->boolean()
+                    ->trueIcon('heroicon-m-lock-closed')
+                    ->falseIcon('heroicon-m-lock-open')
+                    ->trueColor('warning')
+                    ->falseColor('success')
+                    ->state(fn(Model $record) => $record->isRented()),
+
+                // disponible si no está alquilada y status es true
+                TextColumn::make('periodo')
+                    ->label('P. arrendamiento')
+                    ->formatStateUsing(function (Model $record) {
+                        if ($record->isRented()) {
+                            $period = $record->getRentalPeriod();
+                            return 'Del ' . \Carbon\Carbon::parse($period['from'])->format('d/m/Y') . ' al ' . \Carbon\Carbon::parse($period['to'])->format('d/m/Y');
+                        }
+                        return '—';
+                    }),
 
                 TextColumn::make('address')
                     ->label('Dirección'),
 
                 TextColumn::make('mediatype.name')
                     ->label('Tipo de medio')
-                    ->searchable(),
-
-                TextColumn::make('district.name')
-                    ->label('Distrito')
                     ->searchable(),
                 ColumnGroup::make('Medidas', [
                     TextColumn::make('width')->label('Ancho'),
@@ -191,31 +206,30 @@ class ExternalmediaResource extends Resource
                     ->relationship('mediatype', 'name')
                     ->searchable(),
             ])
-           ->actions([
-    MediaAction::make('gallery')
-        ->media(fn($record) => 'storage/' . $record->gallery[0])
-        ->modalHeading(fn($record) => $record->code)
-        ->icon('fas-image')
-        ->iconButton()
-        ->label('Galería')
-        ->tooltip('Ver imagen principal')
-        ->size('xl'),
+            ->actions([
+                MediaAction::make('gallery')
+                    ->media(fn($record) => 'storage/' . $record->gallery[0])
+                    ->modalHeading(fn($record) => $record->code)
+                    ->icon('fas-image')
+                    ->iconButton()
+                    ->label('Galería')
+                    ->tooltip('Ver imagen principal')
+                    ->size('xl'),
+                Action::make('ver_mapa')
+                    ->label('Detalles')
+                    ->icon('heroicon-m-document-text') // Changed icon
+                    ->color('info')
+                    ->modalHeading('Ubicación en el mapa')
+                    ->modalSubheading(fn($record) => $record->code)
+                    ->modalContent(content: fn($record) => view('components.mapa-modal', ['record' => $record, 'iframe' => $record->location_embed]))
+                    ->modalSubmitAction(false) // 🔴 Oculta el botón de enviar
+                    ->visible(fn($record) => !empty($record->location_embed)),
 
-    Action::make('ver_mapa')
-        ->label('Detalles')
-    ->icon('heroicon-m-document-text') // Changed icon
-        ->color('info')
-        ->modalHeading('Ubicación en el mapa')
-        ->modalSubheading(fn($record) => $record->code)
-        ->modalContent(content: fn($record) => view('components.mapa-modal', ['record' => $record,'iframe' => $record->location_embed]))
-        ->modalSubmitAction(false) // 🔴 Oculta el botón de enviar
-        ->visible(fn($record) => !empty($record->location_embed)),
-
-    Tables\Actions\ActionGroup::make([
-        Tables\Actions\EditAction::make(),
-        Tables\Actions\DeleteAction::make(),
-    ])->tooltip('Acciones'),
-])
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])->tooltip('Acciones'),
+            ])
 
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

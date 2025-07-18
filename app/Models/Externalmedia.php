@@ -8,7 +8,7 @@ class Externalmedia extends Model
 {
     protected $table = 'externalmedia';
 
-   protected $fillable = [
+    protected $fillable = [
         'code',
         'clase', // 👈 Asegúrate de que esté aquí
         'location_embed', // 👈 Este también
@@ -51,8 +51,9 @@ class Externalmedia extends Model
 
     public function sales()
     {
-        return $this->belongsToMany(Sale::class, 'externalmedia_sale');
+        return $this->belongsToMany(Sale::class);
     }
+
 
     public function department()
     {
@@ -62,4 +63,39 @@ class Externalmedia extends Model
     {
         return $this->belongsTo(Municipality::class);
     }
+    public function isRented(): bool
+    {
+        $today = now()->toDateString();
+
+        return $this->sales()
+            ->whereDate('begin_date_rental', '<=', $today)
+            ->whereDate('expiration_date_rental', '>=', $today)
+            ->exists();
+    }
+
+
+    public function getRentalPeriod(): ?array
+    {
+        $rental = $this->sales()
+            ->whereDate('begin_date_rental', '<=', now())
+            ->whereDate('expiration_date_rental', '>=', now())
+            ->first();
+
+        return $rental ? [
+            'from' => $rental->begin_date_rental,
+            'to' => $rental->expiration_date_rental,
+        ] : null;
+    }
+    public static function disponiblesParaContrato()
+    {
+        $fechaHoy = now()->toDateString();
+
+        return self::where('status', true) // Disponible manualmente
+            ->whereDoesntHave('sales', function ($query) use ($fechaHoy) {
+                $query->whereDate('begin_date_rental', '<=', $fechaHoy)
+                    ->whereDate('expiration_date_rental', '>=', $fechaHoy);
+            })
+            ->pluck('code', 'id');
+    }
+
 }
