@@ -25,9 +25,9 @@ class Sale extends Model
         'purchaseorder' => 'array',
     ];
 
-   public function externalmedias()
+ public function externalmedias()
 {
-    return $this->belongsToMany(Externalmedia::class);
+    return $this->belongsToMany(Externalmedia::class, 'externalmedia_sale', 'sale_id', 'externalmedia_id');
 }
 
 
@@ -49,6 +49,5 @@ class Sale extends Model
             $sale->externalmedias()->detach(); // <- elimina relaciones en tabla intermedia
         });
     }
-
         
 }

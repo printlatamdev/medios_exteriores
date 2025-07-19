@@ -142,9 +142,15 @@ class ExternalmediaResource extends Resource
     {
         return $table
             ->modifyQueryUsing(
-                fn($query) =>
-                $query->with(['mediatype:id,name', 'district:id,name', 'municipality:id,name', 'department:id,name'])
+                fn($query) => $query->with([
+                    'sales',  // ✅ Agregado correctamente
+                    'mediatype:id,name',
+                    'district:id,name',
+                    'municipality:id,name',
+                    'department:id,name',
+                ])
             )
+
             ->columns([
                 TextColumn::make('code')
                     ->label('Código')
@@ -174,16 +180,25 @@ class ExternalmediaResource extends Resource
                     ->state(fn(Model $record) => $record->isRented()),
 
                 // disponible si no está alquilada y status es true
-                TextColumn::make('periodo')
-                    ->label('P. arrendamiento')
-                    ->formatStateUsing(function (Model $record) {
-                        if ($record->isRented()) {
+                ColumnGroup::make('Arrendamiento', [
+                    TextColumn::make('rental_start')
+                        ->label('Inicio')
+                        ->badge()
+                        ->color('info')
+                        ->formatStateUsing(function (Model $record) {
                             $period = $record->getRentalPeriod();
-                            return 'Del ' . \Carbon\Carbon::parse($period['from'])->format('d/m/Y') . ' al ' . \Carbon\Carbon::parse($period['to'])->format('d/m/Y');
-                        }
-                        return '—';
-                    }),
+                            return $period ? Carbon::parse($period['from'])->format('d/m/Y') : '—';
+                        }),
 
+                    TextColumn::make('rental_end')
+                        ->label('Fin')
+                        ->badge()
+                        ->color('danger')
+                        ->formatStateUsing(function (Model $record) {
+                            $period = $record->getRentalPeriod();
+                            return $period ? Carbon::parse($period['to'])->format('d/m/Y') : '—';
+                        }),
+                ]),
                 TextColumn::make('address')
                     ->label('Dirección'),
 
@@ -207,14 +222,6 @@ class ExternalmediaResource extends Resource
                     ->searchable(),
             ])
             ->actions([
-                MediaAction::make('gallery')
-                    ->media(fn($record) => 'storage/' . $record->gallery[0])
-                    ->modalHeading(fn($record) => $record->code)
-                    ->icon('fas-image')
-                    ->iconButton()
-                    ->label('Galería')
-                    ->tooltip('Ver imagen principal')
-                    ->size('xl'),
                 Action::make('ver_mapa')
                     ->label('Detalles')
                     ->icon('heroicon-m-document-text') // Changed icon
@@ -224,13 +231,19 @@ class ExternalmediaResource extends Resource
                     ->modalContent(content: fn($record) => view('components.mapa-modal', ['record' => $record, 'iframe' => $record->location_embed]))
                     ->modalSubmitAction(false) // 🔴 Oculta el botón de enviar
                     ->visible(fn($record) => !empty($record->location_embed)),
-
+                MediaAction::make('gallery')
+                    ->media(fn($record) => 'storage/' . $record->gallery[0])
+                    ->modalHeading(fn($record) => $record->code)
+                    ->icon('fas-image')
+                    ->iconButton()
+                    ->label('Galería')
+                    ->tooltip('Ver imagen principal')
+                    ->size('xl'),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ])->tooltip('Acciones'),
             ])
-
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\BulkAction::make('Export')

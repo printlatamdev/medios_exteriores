@@ -89,21 +89,84 @@ class SaleResource extends Resource
 
             Section::make('Arrendamiento')->schema([
                 DatePicker::make('begin_date_rental')
-                    ->label('Fecha de inicio'),
+                    ->label('Fecha de inicio')
+                    ->reactive()
+                    ->afterStateUpdated(function (Get $get, Set $set) {
+                        $inicio = $get('begin_date_rental');
+                        $fin = $get('expiration_date_rental');
+                        $mensual = $get('total_rental');
+
+                        if ($inicio && $fin) {
+                            $start = \Carbon\Carbon::parse($inicio);
+                            $end = \Carbon\Carbon::parse($fin);
+
+                            if ($start->gt($end)) {
+                                $set('months', null);
+                                $set('total', null);
+                                return;
+                            }
+
+                            $months = $start->diffInMonths($end) + 1;
+                            $set('months', $months);
+                            $set('total', $months * ($mensual ?? 0));
+                        }
+                    }),
 
                 DatePicker::make('expiration_date_rental')
-                    ->label('Fecha de finalización'),
+                    ->label('Fecha de finalización')
+                    ->reactive()
+                    ->afterStateUpdated(function (Get $get, Set $set) {
+                        $inicio = $get('begin_date_rental');
+                        $fin = $get('expiration_date_rental');
+                        $mensual = $get('total_rental');
+
+                        if ($inicio && $fin) {
+                            $start = \Carbon\Carbon::parse($inicio);
+                            $end = \Carbon\Carbon::parse($fin);
+
+                            if ($start->gt($end)) {
+                                $set('months', null);
+                                $set('total', null);
+                                return;
+                            }
+
+                            $months = $start->diffInMonths($end) + 1;
+                            $set('months', $months);
+                            $set('total', $months * ($mensual ?? 0));
+                        }
+                    }),
 
                 TextInput::make('months')
                     ->label('Cantidad de meses')
-                    ->reactive()
+                    ->readOnly()
                     ->live(),
 
                 TextInput::make('total_rental')
                     ->label('Total mensual')
+                    ->numeric()
                     ->reactive()
-                    ->live(),
+                    ->afterStateUpdated(function (Get $get, Set $set) {
+                        $inicio = $get('begin_date_rental');
+                        $fin = $get('expiration_date_rental');
+                        $mensual = $get('total_rental');
+
+                        if ($inicio && $fin) {
+                            $start = \Carbon\Carbon::parse($inicio);
+                            $end = \Carbon\Carbon::parse($fin);
+
+                            if ($start->gt($end)) {
+                                $set('months', null);
+                                $set('total', null);
+                                return;
+                            }
+
+                            $months = $start->diffInMonths($end) + 1;
+                            $set('months', $months);
+                            $set('total', $months * ($mensual ?? 0));
+                        }
+                    }),
             ])->columns(4),
+
             Section::make('Archivos adjuntos')->schema([
                 FileUpload::make('quote')
                     ->directory('files')
