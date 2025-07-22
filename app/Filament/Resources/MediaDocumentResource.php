@@ -152,35 +152,39 @@ class MediaDocumentResource extends Resource
                     ->action(function ($record) {
                         $pdf = new Fpdi();
 
-                        // Asegúrate de que el $record sea un MediaDocument y esté cargado con su Externalmedia
-                        $externalMedia = $record->externalmedia;
-
-                        $documentos = $externalMedia?->mediaDocuments()->whereNotNull('file_path')->get() ?? collect();
+                        $documentos = $record->externalmedia
+                            ->mediaDocuments()
+                            ->whereNotNull('file_path')
+                            ->get();
 
                         foreach ($documentos as $documento) {
-                            $filePath = storage_path('app/' . $documento->file_path);
-
+                            $filePath = Storage::disk('public')->path($documento->file_path);
 
                             if (file_exists($filePath)) {
-                                $pageCount = $pdf->setSourceFile($filePath);
+                                try {
+                                    $pageCount = $pdf->setSourceFile($filePath);
 
-                                for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
-                                    $templateId = $pdf->importPage($pageNo);
-                                    $size = $pdf->getTemplateSize($templateId);
+                                    for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+                                        $templateId = $pdf->importPage($pageNo);
+                                        $size = $pdf->getTemplateSize($templateId);
 
-                                    $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
-                                    $pdf->useTemplate($templateId);
+                                        $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
+                                        $pdf->useTemplate($templateId);
+                                    }
+                                } catch (\Exception $e) {
+                                    // Puedes loguear esto
+                                    \Log::error("Error al procesar PDF: " . $filePath . " - " . $e->getMessage());
                                 }
                             }
                         }
 
-                        $tempFile = storage_path("app/public/merged_docs_{$externalMedia->code}.pdf");
+                        $fileName = "merged_docs_{$record->externalmedia->code}.pdf";
+                        $tempFile = storage_path("app/public/{$fileName}");
                         $pdf->Output($tempFile, 'F');
 
                         return response()->download($tempFile)->deleteFileAfterSend();
                     })
-                    ->visible(fn($record) => $record->externalmedia?->mediaDocuments()->exists()),
-
+                    ->visible(fn($record) => $record->externalmedia?->mediaDocuments()?->exists()),
                 Action::make('edit')
                     ->icon('heroicon-o-pencil')
                     ->tooltip('Editar documento')
