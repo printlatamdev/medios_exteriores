@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Filament\Tables\Actions\Action;
+use App\Filament\Resources\ExternalmediaResource\RelationManagers\MediaDocumentsRelationManager;
+
 
 class ExternalmediaResource extends Resource
 {
@@ -87,7 +89,6 @@ class ExternalmediaResource extends Resource
                         ->multiple()
                         ->directory('media')
                         ->label('Galería de medios')
-                        //->preserveFilenames()
                         ->image()
                         ->panelLayout('grid'),
                 ]),
@@ -187,7 +188,7 @@ class ExternalmediaResource extends Resource
                         ->color('info')
                         ->formatStateUsing(function (Model $record) {
                             $period = $record->getRentalPeriod();
-                            return $period ? Carbon::parse($period['from'])->format('d/m/Y') : '—';
+                            return $period ? \Carbon\Carbon::parse($period['from'])->format('d/m/Y') : '—';
                         }),
 
                     TextColumn::make('rental_end')
@@ -196,7 +197,7 @@ class ExternalmediaResource extends Resource
                         ->color('danger')
                         ->formatStateUsing(function (Model $record) {
                             $period = $record->getRentalPeriod();
-                            return $period ? Carbon::parse($period['to'])->format('d/m/Y') : '—';
+                            return $period ? \Carbon\Carbon::parse($period['to'])->format('d/m/Y') : '—';
                         }),
                 ]),
                 TextColumn::make('address')
@@ -264,12 +265,12 @@ class ExternalmediaResource extends Resource
     }
 
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
+  public static function getRelations(): array
+{
+    return [
+        MediaDocumentsRelationManager::class,
+    ];
+}
 
     public static function getPages(): array
     {
