@@ -39,8 +39,13 @@ class UserResource extends Resource
                     ->required()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn (?string $state): bool => filled($state)),
-                Select::make('roles')->multiple()->relationship('roles', 'name')->options(Role::pluck('name', 'id'))->required(),
-            ]);
+                    Select::make('roles')
+                    ->label('Rol(es)')
+                    ->multiple()
+                    ->relationship('roles', 'name')
+                    ->required(),
+
+                            ]);
     }
 
     public static function table(Table $table): Table

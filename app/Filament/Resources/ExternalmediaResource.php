@@ -142,70 +142,73 @@ class ExternalmediaResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(
-                fn($query) => $query->with([
-                    'sales',  // ✅ Agregado correctamente
-                    'mediatype:id,name',
-                    'district:id,name',
-                    'municipality:id,name',
-                    'department:id,name',
-                ])
-            )
-
+            ->modifyQueryUsing(function ($query) {
+                return $query
+                    ->with([
+                        'sales:id',
+                        'mediatype:id,name',
+                        'district:id,name',
+                        'municipality:id,name',
+                        'department:id,name',
+                    ]);
+            })
             ->columns([
                 TextColumn::make('code')
                     ->label('Código')
                     ->searchable(),
+    
                 TextColumn::make('clase')
                     ->label('Clase')
                     ->sortable()
                     ->searchable(),
-
+    
                 IconColumn::make('status')
                     ->label('Operativo')
-                    ->tooltip(fn(Model $record) => $record->status ? 'Disponible para operar' : 'Inhabilitado por permisos u otros motivos')
                     ->boolean()
+                    ->tooltip(fn($record) => $record->status ? 'Disponible para operar' : 'Inhabilitado')
                     ->trueIcon('heroicon-m-check-circle')
                     ->falseIcon('heroicon-m-x-circle')
                     ->trueColor('success')
                     ->falseColor('danger'),
-
+    
                 IconColumn::make('is_rented')
                     ->label('Arrendada')
-                    ->tooltip(fn(Model $record) => $record->isRented() ? 'Este medio está alquilado actualmente' : 'Disponible para arrendar')
                     ->boolean()
+                    ->tooltip(fn($record) => $record->isRented() ? 'Alquilada' : 'Disponible')
                     ->trueIcon('heroicon-m-lock-closed')
                     ->falseIcon('heroicon-m-lock-open')
                     ->trueColor('warning')
                     ->falseColor('success')
-                    ->state(fn(Model $record) => $record->isRented()),
-
-                // disponible si no está alquilada y status es true
+                    ->state(fn($record) => $record->isRented()),
+    
                 ColumnGroup::make('Arrendamiento', [
                     TextColumn::make('rental_start')
                         ->label('Inicio')
                         ->badge()
                         ->color('info')
-                        ->formatStateUsing(function (Model $record) {
-                            $period = $record->getRentalPeriod();
-                            return $period ? \Carbon\Carbon::parse($period['from'])->format('d/m/Y') : '—';
-                        }),
-
+                        ->formatStateUsing(fn($record) =>
+                            optional($record->getRentalPeriod())['from']
+                                ? \Carbon\Carbon::parse($record->getRentalPeriod()['from'])->format('d/m/Y')
+                                : '—'
+                        ),
+    
                     TextColumn::make('rental_end')
                         ->label('Fin')
                         ->badge()
                         ->color('danger')
-                        ->formatStateUsing(function (Model $record) {
-                            $period = $record->getRentalPeriod();
-                            return $period ? \Carbon\Carbon::parse($period['to'])->format('d/m/Y') : '—';
-                        }),
+                        ->formatStateUsing(fn($record) =>
+                            optional($record->getRentalPeriod())['to']
+                                ? \Carbon\Carbon::parse($record->getRentalPeriod()['to'])->format('d/m/Y')
+                                : '—'
+                        ),
                 ]),
-                TextColumn::make('address')
-                    ->label('Dirección'),
-
+    
+                TextColumn::make('address')->label('Dirección'),
+    
                 TextColumn::make('mediatype.name')
                     ->label('Tipo de medio')
                     ->searchable(),
+    
                 ColumnGroup::make('Medidas', [
                     TextColumn::make('width')->label('Ancho'),
                     TextColumn::make('height')->label('Alto'),
@@ -216,7 +219,7 @@ class ExternalmediaResource extends Resource
                     ->label('Distrito')
                     ->relationship('district', 'name')
                     ->searchable(),
-
+    
                 Tables\Filters\SelectFilter::make('mediatype')
                     ->label('Tipo de medio')
                     ->relationship('mediatype', 'name')
@@ -225,25 +228,29 @@ class ExternalmediaResource extends Resource
             ->actions([
                 Action::make('ver_mapa')
                     ->label('Detalles')
-                    ->icon('heroicon-m-document-text') // Changed icon
+                    ->icon('heroicon-m-document-text')
                     ->color('info')
                     ->modalHeading('Ubicación en el mapa')
                     ->modalSubheading(fn($record) => $record->code)
-                    ->modalContent(content: fn($record) => view('components.mapa-modal', ['record' => $record, 'iframe' => $record->location_embed]))
-                    ->modalSubmitAction(false) // 🔴 Oculta el botón de enviar
+                    ->modalContent(fn($record) =>
+                        view('components.mapa-modal', ['record' => $record, 'iframe' => $record->location_embed])
+                    )
+                    ->modalSubmitAction(false)
                     ->visible(fn($record) => !empty($record->location_embed)),
+    
                 MediaAction::make('gallery')
-                    ->media(fn($record) => 'storage/' . $record->gallery[0])
+                    ->media(fn($record) => 'storage/' . ($record->gallery[0] ?? ''))
                     ->modalHeading(fn($record) => $record->code)
                     ->icon('fas-image')
                     ->iconButton()
                     ->label('Galería')
                     ->tooltip('Ver imagen principal')
                     ->size('xl'),
+    
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
-                ])->tooltip('Acciones'),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -263,7 +270,7 @@ class ExternalmediaResource extends Resource
                 ]),
             ]);
     }
-
+    
 
   public static function getRelations(): array
 {
