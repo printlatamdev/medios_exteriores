@@ -142,16 +142,26 @@ class ExternalmediaResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(function ($query) {
-                return $query
-                    ->with([
-                        'sales:id',
-                        'mediatype:id,name',
-                        'district:id,name',
-                        'municipality:id,name',
-                        'department:id,name',
-                    ]);
-            })
+        ->modifyQueryUsing(function ($query) {
+            $today = now()->format('Y-m-d');
+        
+            return $query
+                ->with([
+                    'sales:id,externalmedia_id,begin_date_rental,expiration_date_rental',
+                    'mediatype:id,name',
+                    'district:id,name',
+                    'municipality:id,name',
+                    'department:id,name',
+                ])
+                ->addSelect([
+                    'is_rented' => Sale::selectRaw('1')
+                        ->whereColumn('externalmedia_id', 'externalmedia.id')
+                        ->where('begin_date_rental', '<=', $today)
+                        ->where('expiration_date_rental', '>=', $today)
+                        ->limit(1)
+                ])
+                ->withCasts(['is_rented' => 'boolean']);
+        })
             ->columns([
                 TextColumn::make('code')
                     ->label('Código')
@@ -171,15 +181,15 @@ class ExternalmediaResource extends Resource
                     ->trueColor('success')
                     ->falseColor('danger'),
     
-                IconColumn::make('is_rented')
+                    IconColumn::make('is_rented')
                     ->label('Arrendada')
                     ->boolean()
-                    ->tooltip(fn($record) => $record->isRented() ? 'Alquilada' : 'Disponible')
+                    ->tooltip(fn($record) => $record->is_rented ? 'Alquilada' : 'Disponible')
                     ->trueIcon('heroicon-m-lock-closed')
                     ->falseIcon('heroicon-m-lock-open')
                     ->trueColor('warning')
                     ->falseColor('success')
-                    ->state(fn($record) => $record->isRented()),
+                    ,
     
                 ColumnGroup::make('Arrendamiento', [
                     TextColumn::make('rental_start')
